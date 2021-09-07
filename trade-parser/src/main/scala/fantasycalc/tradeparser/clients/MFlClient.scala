@@ -6,8 +6,11 @@ import fantasycalc.tradeparser.models.api.mfl.LeagueSearchApiResponse
 import io.circe.generic.auto._
 import org.http4s.client.Client
 
+trait MflClient[F[_]] {
+  def searchLeagues(search: String): F[LeagueSearchApiResponse]
+}
 
-class MFlClient[F[_]: Concurrent](httpClient: Client[F]) {
+class MflClientImpl[F[_]: Concurrent](httpClient: Client[F]) extends MflClient[F] {
   private val YEAR = 2021
   private val BASE_URL = s"https://api.myfantasyleague.com/$YEAR"
 

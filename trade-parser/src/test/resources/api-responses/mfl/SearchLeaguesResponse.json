@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "leagues": {
+    "league": [
+      {
+        "homeURL": "http://www81.myfantasyleague.com/2021/home/10005",
+        "name": "Masters Copper Dynasty 140379 - Classic 4",
+        "id": "10005"
+      },
+      {
+        "homeURL": "http://www65.myfantasyleague.com/2021/home/10007",
+        "name": "Masters Tin Dynasty 140616 - Bravo 1902",
+        "id": "10007"
+      },
+      {
+        "homeURL": "http://www62.myfantasyleague.com/2021/home/10010",
+        "name": "Apex Amateur Dynasty 203",
+        "id": "10010"
+      },
+      {
+        "homeURL": "http://www74.myfantasyleague.com/2021/home/10015",
+        "name": "Dynasty Pioneer",
+        "id": "10015"
+      }
+    ]
+  },
+  "encoding": "utf-8"
+}
