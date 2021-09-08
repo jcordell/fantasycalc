@@ -1,7 +1,6 @@
 package fantasycalc.tradeparser.services.fantasysite.scrapers
 
 import cats.Monad
-import cats.effect.Concurrent
 import cats.implicits._
 import fantasycalc.tradeparser.clients.MflClient
 import fantasycalc.tradeparser.models._
