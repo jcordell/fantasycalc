@@ -25,6 +25,8 @@ lazy val root = (project in file("."))
       "com.beachape" %% "enumeratum" % EnumeratumVersion,
       "org.scalameta" %% "svm-subs" % "20.2.0",
       "org.scalactic" %% "scalactic" % "3.2.9",
+      "joda-time" % "joda-time" % "2.10.10",
+      "org.joda" % "joda-convert" % "2.2.1",
       "org.scalatest" %% "scalatest" % "3.2.9" % "test"
     ),
     addCompilerPlugin(

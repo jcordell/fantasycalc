@@ -1,0 +1,118 @@
+{
+  "version": "1.0",
+  "transactions": {
+    "transaction": [
+      {
+        "franchise2": "0009",
+        "franchise2_gave_up": "14141,FP_0010_2022_3,",
+        "timestamp": "1630534475",
+        "by_commish": "1",
+        "franchise": "0004",
+        "franchise1_gave_up": "15287,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1630702800"
+      },
+      {
+        "franchise2": "0005",
+        "franchise2_gave_up": "14072,FP_0005_2022_2,FP_0005_2022_3,",
+        "timestamp": "1630459018",
+        "by_commish": "1",
+        "franchise": "0004",
+        "franchise1_gave_up": "14087,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1630620000"
+      },
+      {
+        "franchise2": "0009",
+        "franchise2_gave_up": "13131,14846,",
+        "timestamp": "1630357092",
+        "by_commish": "1",
+        "franchise": "0001",
+        "franchise1_gave_up": "13589,13156,FP_0001_2022_3,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1630522800"
+      },
+      {
+        "franchise2": "0001",
+        "franchise2_gave_up": "12620,DP_0_9,",
+        "timestamp": "1623627283",
+        "by_commish": "1",
+        "franchise": "0008",
+        "franchise1_gave_up": "13299,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1623780000"
+      },
+      {
+        "franchise2": "0009",
+        "franchise2_gave_up": "FP_0009_2022_2,",
+        "timestamp": "1621807187",
+        "by_commish": "1",
+        "franchise": "0010",
+        "franchise1_gave_up": "DP_2_0,FP_0010_2022_3,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1621972810"
+      },
+      {
+        "franchise2": "0008",
+        "franchise2_gave_up": "DP_2_2,",
+        "timestamp": "1621109984",
+        "by_commish": "1",
+        "franchise": "0003",
+        "franchise1_gave_up": "DP_2_6,DP_2_7,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1621281600"
+      },
+      {
+        "franchise2": "0003",
+        "franchise2_gave_up": "FP_0003_2022_2,FP_0003_2022_3,",
+        "timestamp": "1621023964",
+        "by_commish": "1",
+        "franchise": "0004",
+        "franchise1_gave_up": "DP_1_7,DP_2_7,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1629133200"
+      },
+      {
+        "franchise2": "0008",
+        "franchise2_gave_up": "13277,14137,DP_1_1,DP_1_2,",
+        "timestamp": "1620249129",
+        "by_commish": "1",
+        "franchise": "0003",
+        "franchise1_gave_up": "14778,13299,DP_1_6,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1620410400"
+      },
+      {
+        "franchise2": "0010",
+        "franchise2_gave_up": "DP_0_0,",
+        "timestamp": "1620233109",
+        "by_commish": "1",
+        "franchise": "0008",
+        "franchise1_gave_up": "DP_0_2,DP_0_5,",
+        "type": "TRADE",
+        "comments": "After thinking about it. There is only one player I want and I think I need the #1 to assure it!",
+        "expires": "1620777600"
+      },
+      {
+        "franchise2": "0001",
+        "franchise2_gave_up": "14835,",
+        "timestamp": "1617037796",
+        "by_commish": "1",
+        "franchise": "0008",
+        "franchise1_gave_up": "12176,DP_0_1,",
+        "type": "TRADE",
+        "comments": "",
+        "expires": "1616893200"
+      }
+    ]
+  },
+  "encoding": "utf-8"
+}

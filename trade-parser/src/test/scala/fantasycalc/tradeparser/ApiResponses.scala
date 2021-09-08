@@ -1,10 +1,7 @@
 package fantasycalc.tradeparser
 import java.nio.file.{Files, Paths}
 
-import fantasycalc.tradeparser.models.api.mfl.{
-  LeagueSearchApiResponse,
-  PlayersApiResponse
-}
+import fantasycalc.tradeparser.models.api.mfl.{LeagueSearchApiResponse, PlayersApiResponse, TradesApiResponse}
 import io.circe._
 import io.circe.generic.auto._
 import io.circe.parser._
@@ -17,6 +14,9 @@ object ApiResponses {
 
     val PlayersResponse: PlayersApiResponse =
       load[PlayersApiResponse]("mfl/PlayersResponse.json")
+
+    val TradesResponse: TradesApiResponse =
+      load[TradesApiResponse]("mfl/TradesResponse.json")
   }
 
   private def load[T: Decoder](path: String): T = {

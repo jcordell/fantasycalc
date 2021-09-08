@@ -1,3 +1,3 @@
 package fantasycalc.tradeparser.models
 
-case class LeagueSettings (leagueId: LeagueId)
+case class LeagueSettings(leagueId: LeagueId)

@@ -1,26 +1,13 @@
 package fantasycalc.tradeparser.services.fantasysite.mfl
 
-import cats.Monad
-import fantasycalc.tradeparser.clients.MflClient
 import fantasycalc.tradeparser.models.FantasycalcAssetId
-import fantasycalc.tradeparser.models.api.mfl.MflPlayer
-import cats.implicits._
+import fantasycalc.tradeparser.models.api.mfl.{MflId, PlayersApiResponse}
 
-class PlayerIdConverter[F[_]: Monad](mflClient: MflClient[F]) {
-  def toFantasycalcAssetId(
-    mflPlayer: MflPlayer
-  ): F[Option[FantasycalcAssetId]] = getPlayerIdLookup.mapApply(mflPlayer)
-
-  private def getPlayerIdLookup: F[MflPlayer => Option[FantasycalcAssetId]] =
-    for {
-      playerResponse <- mflClient.getPlayers
-    } yield {
-      // TODO: Actually create/use internal FantasycalcAssetId.
-      val lookupMap: Map[MflPlayer, FantasycalcAssetId] =
-        playerResponse.players.player
-          .map(player => player -> FantasycalcAssetId(player.id))
-          .toMap
-      lookupMap.get _
-    }
+// TODO: Should this be a `AssetId` typeclass?
+// TODO: This will take something other than PlayersApiResponse once using an actual internal id map.
+class PlayerIdConverter(playersApiResponse: PlayersApiResponse) {
+  // TODO: Actually create/use internal FantasycalcAssetId.
+  def toFantasycalcAssetId(mflId: MflId): Option[FantasycalcAssetId] =
+    Some(FantasycalcAssetId(mflId.id))
 
 }
