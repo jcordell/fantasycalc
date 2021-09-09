@@ -1,0 +1,308 @@
+{
+  "version": "1.0",
+  "league": {
+    "currentWaiverType": "WAIVERS_FCFS",
+    "playerLimitUnit": "LEAGUE",
+    "taxiSquad": "0",
+    "endWeek": "18",
+    "maxWaiverRounds": "1",
+    "draft_kind": "live",
+    "lockout": "No",
+    "franchises": {
+      "count": "12",
+      "franchise": [
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0026.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0026.png",
+          "division": "00",
+          "name": "Playoff Chokers",
+          "id": "0001",
+          "waiverSortOrder": "10",
+          "stadium": "The Keg"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2016/newhelmets/nh-0040.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2016/newhelmets/nh-0040.png",
+          "abbrev": "Smurfy",
+          "division": "02",
+          "name": "Geaux Tigers",
+          "id": "0002",
+          "waiverSortOrder": "9"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0078.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0078.png",
+          "division": "01",
+          "name": "Husky Howlers ",
+          "id": "0003",
+          "waiverSortOrder": "8"
+        },
+        {
+          "icon": "https://www60.myfantasyleague.com/fflnetdynamic2020/38079_franchise_icon0004.png",
+          "abbrev": "RRN",
+          "division": "02",
+          "name": "Rocco's Roughnecks",
+          "waiverSortOrder": "11",
+          "logo": "https://www60.myfantasyleague.com/fflnetdynamic2020/38079_franchise_logo0004.png",
+          "id": "0004",
+          "stadium": "Tia Maria Memorial Stadium"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0056.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0056.png",
+          "division": "01",
+          "name": "Runnin Rebels",
+          "id": "0005",
+          "waiverSortOrder": "7"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0287.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0287.png",
+          "division": "00",
+          "name": " Wildcatz  ",
+          "id": "0006",
+          "waiverSortOrder": "6"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2018/helmets/h-0848.gif",
+          "icon": "https://www60.myfantasyleague.com/fflnet2018/helmets/h-0848.gif",
+          "division": "01",
+          "name": "Phantom Bees",
+          "id": "0007",
+          "waiverSortOrder": "12",
+          "stadium": "The Beehive"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2013/newhelmets/nh-0193.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2013/newhelmets/nh-0193.png",
+          "division": "00",
+          "name": "Naraku's Poisonous Insects",
+          "id": "0008",
+          "waiverSortOrder": "5",
+          "stadium": "Naraku's Castle"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0074.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0074.png",
+          "division": "02",
+          "name": "Bashers",
+          "id": "0009",
+          "waiverSortOrder": "4"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0029.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0029.png",
+          "division": "00",
+          "name": "Midway Monsters",
+          "id": "0010",
+          "waiverSortOrder": "3"
+        },
+        {
+          "logo": "https://www60.myfantasyleague.com/fflnet2019/newhelmets/nh-0047.png",
+          "icon": "https://www60.myfantasyleague.com/fflnet2020/newhelmets/nh-0047.png",
+          "abbrev": "GF",
+          "division": "01",
+          "name": "GodFather",
+          "id": "0011",
+          "waiverSortOrder": "2"
+        },
+        {
+          "icon": "https://www60.myfantasyleague.com/fflnet2013/newhelmets/nh-0054.png",
+          "abbrev": "FBA",
+          "division": "02",
+          "name": "Footballaholics",
+          "waiverSortOrder": "1",
+          "logo": "https://www60.myfantasyleague.com/fflnet2011/newhelmets/nh-0055.png",
+          "id": "0012",
+          "stadium": "The Drunk Tank Stadium"
+        }
+      ]
+    },
+    "standingsSort": "PCT,H2H,DIVPCT,PTS,",
+    "draftPlayerPool": "Rookie",
+    "id": "38079",
+    "history": {
+      "league": [
+        {
+          "url": "https://www60.myfantasyleague.com/2021/home/38079",
+          "year": "2021"
+        },
+        {
+          "url": "http://www98.myfantasyleague.com/2001/home/3130",
+          "year": "2001"
+        },
+        {
+          "url": "http://www98.myfantasyleague.com/2002/home/20810",
+          "year": "2002"
+        },
+        {
+          "url": "http://www98.myfantasyleague.com/2003/home/18940",
+          "year": "2003"
+        },
+        {
+          "url": "http://www98.myfantasyleague.com/2004/home/33959",
+          "year": "2004"
+        },
+        {
+          "url": "http://www98.myfantasyleague.com/2005/home/31451",
+          "year": "2005"
+        },
+        {
+          "url": "http://www98.myfantasyleague.com/2006/home/47546",
+          "year": "2006"
+        },
+        {
+          "url": "http://www98.myfantasyleague.com/2007/home/29336",
+          "year": "2007"
+        },
+        {
+          "url": "http://www98.myfantasyleague.com/2008/home/48281",
+          "year": "2008"
+        },
+        {
+          "url": "http://www58.myfantasyleague.com/2009/home/40416",
+          "year": "2009"
+        },
+        {
+          "url": "http://www58.myfantasyleague.com/2010/home/28724",
+          "year": "2010"
+        },
+        {
+          "url": "http://www63.myfantasyleague.com/2011/home/36256",
+          "year": "2011"
+        },
+        {
+          "url": "http://www59.myfantasyleague.com/2012/home/49473",
+          "year": "2012"
+        },
+        {
+          "url": "http://www58.myfantasyleague.com/2013/home/38231",
+          "year": "2013"
+        },
+        {
+          "url": "http://www63.myfantasyleague.com/2014/home/16373",
+          "year": "2014"
+        },
+        {
+          "url": "http://www60.myfantasyleague.com/2015/home/48548",
+          "year": "2015"
+        },
+        {
+          "url": "http://www60.myfantasyleague.com/2016/home/38079",
+          "year": "2016"
+        },
+        {
+          "url": "http://www60.myfantasyleague.com/2017/home/38079",
+          "year": "2017"
+        },
+        {
+          "url": "http://www60.myfantasyleague.com/2018/home/38079",
+          "year": "2018"
+        },
+        {
+          "url": "http://www60.myfantasyleague.com/2019/home/38079",
+          "year": "2019"
+        },
+        {
+          "url": "https://www60.myfantasyleague.com/2020/home/38079",
+          "year": "2020"
+        }
+      ]
+    },
+    "rosterSize": "60",
+    "name": "                                               Pigskin League ",
+    "draftTimer": "ON",
+    "fantasyPoolType": "Pickem",
+    "rosterLimits": {
+      "position": [
+        {
+          "name": "QB",
+          "limit": "0-0"
+        },
+        {
+          "name": "RB",
+          "limit": "0-0"
+        },
+        {
+          "name": "WR",
+          "limit": "0-0"
+        },
+        {
+          "name": "TE",
+          "limit": "0-0"
+        },
+        {
+          "name": "PK",
+          "limit": "0-0"
+        },
+        {
+          "name": "Def",
+          "limit": "0-0"
+        }
+      ]
+    },
+    "mobileAlerts": "",
+    "draftLimitHours": "0:04",
+    "starters": {
+      "count": "12",
+      "position": [
+        {
+          "name": "QB",
+          "limit": "2"
+        },
+        {
+          "name": "RB",
+          "limit": "2"
+        },
+        {
+          "name": "WR",
+          "limit": "4"
+        },
+        {
+          "name": "TE",
+          "limit": "2"
+        },
+        {
+          "name": "PK",
+          "limit": "1"
+        },
+        {
+          "name": "Def",
+          "limit": "1"
+        }
+      ]
+    },
+    "fantasyPoolEndWeek": "17",
+    "precision": "0",
+    "lastRegularSeasonWeek": "14",
+    "usesContractYear": "0",
+    "injuredReserve": "10",
+    "startWeek": "1",
+    "fantasyPoolStartWeek": "1",
+    "rostersPerPlayer": "1",
+    "leagueLogo": "https://www60.myfantasyleague.com/fflnetdynamic2015/48548_league_logo.gif",
+    "h2h": "YES",
+    "usesSalaries": "0",
+    "tiebreaker": "commish",
+    "divisions": {
+      "count": "3",
+      "division": [
+        {
+          "name": " Black ",
+          "id": "00"
+        },
+        {
+          "name": "Blue ",
+          "id": "01"
+        },
+        {
+          "name": "  White",
+          "id": "02"
+        }
+      ]
+    },
+    "baseURL": "https://www60.myfantasyleague.com",
+    "loadRosters": "live_draft"
+  },
+  "encoding": "utf-8"
+}

@@ -11,8 +11,8 @@ class PlayerInfoService(playersApiResponse: PlayersApiResponse) {
     playersApiResponse.players.player
       .map(
         player =>
-          FantasycalcAssetId(player.id) -> Player(
-            FantasycalcAssetId(player.id),
+          FantasycalcAssetId(player.id.getOrElse("Unknown")) -> Player(
+            FantasycalcAssetId(player.id.getOrElse("Unknown")),
             PlayerName(player.name.getOrElse("Unknown"))
           )
       )

@@ -7,5 +7,5 @@ trait FantasySiteService[F[_], T <: FantasySite] {
 
   def getTrades(leagueId: LeagueId): F[List[Trade]]
 
-  def getSettings(leagueId: LeagueId): F[List[LeagueSettings]]
+  def getSettings(leagueId: LeagueId): F[LeagueSettings]
 }

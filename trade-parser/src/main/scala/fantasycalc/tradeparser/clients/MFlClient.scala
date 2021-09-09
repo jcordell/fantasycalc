@@ -4,8 +4,10 @@ import cats.effect.Concurrent
 import fantasycalc.tradeparser.models.ImplicitEntityCodecs._
 import fantasycalc.tradeparser.models.LeagueId
 import fantasycalc.tradeparser.models.api.mfl.{
+  LeagueApiResponse,
   LeagueSearchApiResponse,
   PlayersApiResponse,
+  RulesApiResponse,
   TradesApiResponse
 }
 import io.circe.generic.auto._
@@ -17,6 +19,10 @@ trait MflClient[F[_]] {
   def getPlayers: F[PlayersApiResponse]
 
   def getTrades(leagueId: LeagueId): F[TradesApiResponse]
+
+  def getRules(leagueId: LeagueId): F[RulesApiResponse]
+
+  def getLeague(leagueId: LeagueId): F[LeagueApiResponse]
 }
 
 class MflClientImpl[F[_]: Concurrent](httpClient: Client[F])
@@ -38,5 +44,17 @@ class MflClientImpl[F[_]: Concurrent](httpClient: Client[F])
     val url =
       s"$BASE_URL/export?TYPE=transactions&L=${leagueId.id}&APIKEY=&W=&TRANS_TYPE=TRADE&FRANCHISE=&DAYS=&COUNT=&JSON=1"
     httpClient.expect[TradesApiResponse](url)
+  }
+
+  def getLeague(leagueId: LeagueId): F[LeagueApiResponse] = {
+    val url =
+      s"$BASE_URL/export?TYPE=league&L=${leagueId.id}&JSON=1"
+    httpClient.expect[LeagueApiResponse](url)
+  }
+
+  def getRules(leagueId: LeagueId): F[RulesApiResponse] = {
+    val url =
+      s"$BASE_URL/export?TYPE=rules&L=${leagueId.id}&JSON=1"
+    httpClient.expect[RulesApiResponse](url)
   }
 }

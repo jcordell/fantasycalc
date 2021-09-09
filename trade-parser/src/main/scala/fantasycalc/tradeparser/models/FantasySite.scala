@@ -7,5 +7,5 @@ sealed trait FantasySite extends EnumEntry
 object FantasySite extends Enum[FantasySite] {
   val values: IndexedSeq[FantasySite] = findValues
 
-  case object MFL   extends FantasySite
+  case object MFL extends FantasySite
 }
