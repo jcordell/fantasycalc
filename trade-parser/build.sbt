@@ -36,3 +36,17 @@ lazy val root = (project in file("."))
     testFrameworks += new TestFramework("munit.Framework")
 //    resolvers += "Artima Maven Repository" at "https://repo.artima.com/releases"
   )
+
+enablePlugins(DockerPlugin)
+
+docker / dockerfile := {
+  // The assembly task generates a fat JAR file
+  val artifact: File = assembly.value
+  val artifactTargetPath = s"/app/${artifact.name}"
+
+  new Dockerfile {
+    from("openjdk:8-jre")
+    add(artifact, artifactTargetPath)
+    entryPoint("java", "-jar", artifactTargetPath)
+  }
+}
