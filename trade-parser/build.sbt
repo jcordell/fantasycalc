@@ -4,6 +4,7 @@ val MunitVersion = "0.7.27"
 val LogbackVersion = "1.2.5"
 val MunitCatsEffectVersion = "1.0.5"
 val EnumeratumVersion = "1.7.0"
+val DoobieVersion = "1.0.0-RC1"
 
 lazy val root = (project in file("."))
   .settings(
@@ -19,9 +20,13 @@ lazy val root = (project in file("."))
       "io.circe" %% "circe-generic" % CirceVersion,
       "io.circe" %% "circe-core" % CirceVersion,
       "io.circe" %% "circe-parser" % CirceVersion,
+      "org.tpolecat" %% "doobie-core" % DoobieVersion,
+      "org.tpolecat" %% "doobie-postgres" % DoobieVersion,
+      "org.tpolecat" %% "doobie-specs2" % DoobieVersion,
       "org.scalameta" %% "munit" % MunitVersion % Test,
       "org.typelevel" %% "munit-cats-effect-3" % MunitCatsEffectVersion % Test,
       "ch.qos.logback" % "logback-classic" % LogbackVersion,
+      "mysql" % "mysql-connector-java" % "5.1.45",
       "com.beachape" %% "enumeratum" % EnumeratumVersion,
       "org.scalameta" %% "svm-subs" % "20.2.0",
       "org.scalactic" %% "scalactic" % "3.2.9",
@@ -50,3 +55,29 @@ docker / dockerfile := {
     entryPoint("java", "-jar", artifactTargetPath)
   }
 }
+
+/* FLYWAY CONFIG */
+
+enablePlugins(FlywayPlugin)
+
+val env = scala.util.Properties.envOrElse("SCALA_ENV", "")
+
+val postgresDatabase = env match {
+  case "test" => scala.util.Properties.envOrElse("API_POSTGRES_TEST_DATABASE", "http4s_api_test")
+  case _ => scala.util.Properties.envOrElse("API_POSTGRES_DATABASE", "fantasycalc_db")
+}
+
+val postgresUser = env match {
+  case "test" => scala.util.Properties.envOrElse("API_POSTGRES_TEST_USER", "postgres")
+  case _ => scala.util.Properties.envOrElse("API_POSTGRES_USER", "postgres")
+}
+
+val postgresPassword = env match {
+  case "test" => scala.util.Properties.envOrElse("API_POSTGRES_TEST_PASS", "")
+  case _ => scala.util.Properties.envOrElse("API_POSTGRES_PASS", "password")
+}
+
+flywayUrl := s"jdbc:postgresql:$postgresDatabase"
+flywayUser := postgresUser
+flywayPassword := postgresPassword
+flywayLocations += "db/migration"
