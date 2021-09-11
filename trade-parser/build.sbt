@@ -25,6 +25,7 @@ lazy val root = (project in file("."))
       "org.tpolecat" %% "doobie-specs2" % DoobieVersion,
       "org.scalameta" %% "munit" % MunitVersion % Test,
       "org.typelevel" %% "munit-cats-effect-3" % MunitCatsEffectVersion % Test,
+      "io.getquill" %% "quill-sql" % "3.10.0",
       "ch.qos.logback" % "logback-classic" % LogbackVersion,
       "mysql" % "mysql-connector-java" % "5.1.45",
       "com.beachape" %% "enumeratum" % EnumeratumVersion,
@@ -57,7 +58,6 @@ docker / dockerfile := {
 }
 
 /* FLYWAY CONFIG */
-
 enablePlugins(FlywayPlugin)
 
 val env = scala.util.Properties.envOrElse("SCALA_ENV", "")

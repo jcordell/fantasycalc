@@ -4,7 +4,9 @@ import cats.effect.{Async, ExitCode, Resource}
 import cats.syntax.all._
 import com.comcast.ip4s._
 import fantasycalc.tradeparser.clients.MflClientImpl
+import fantasycalc.tradeparser.models.LeagueId
 import fantasycalc.tradeparser.modules.FantasySiteModule
+import fantasycalc.tradeparser.services.database.DatabaseService
 import fantasycalc.tradeparser.services.fantasysite.FantasySiteUpdateService
 import fantasycalc.tradeparser.services.fantasysite.mfl.PlayerIdConverter
 import fantasycalc.tradeparser.services.fantasysite.scrapers.MflService
@@ -16,7 +18,7 @@ import org.http4s.server.middleware.Logger
 
 object TradeparserServer {
 
-  def stream[F[_]: Async]: Stream[F, Nothing] = {
+  def stream[F[_]: Async](databaseService: DatabaseService[F]): Stream[F, Nothing] = {
     for {
       httpClient <- Stream.resource(EmberClientBuilder.default[F].build)
 
@@ -26,9 +28,10 @@ object TradeparserServer {
       playersApiResponse <- Stream.eval(mflClient.getPlayers)
       playerIdConverter = new PlayerIdConverter(playersApiResponse)
       mflService = new MflService[F](mflClient, playerIdConverter)
+      __ <- Stream.eval(databaseService.storeLeague(LeagueId("123")))
 
-      hmm <- FantasySiteUpdateService.mock(mflService)
-      _ = println(hmm)
+//      hmm <- new FantasySiteUpdateService[F](databaseService).mock(mflService)
+//      _ = println(hmm)
 
       //      helloWorldAlg = HelloWorld.impl[F]
       //      jokeAlg = Jokes.impl[F](client)
