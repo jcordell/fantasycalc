@@ -22,17 +22,19 @@ create table Leagues(
 --	isDynasty BOOLEAN NOT NULL
 	CONSTRAINT fk_siteId FOREIGN KEY(siteId) REFERENCES FantasySite(siteId)
 );
---
---create table LeagueSettings(
---	leagueId TEXT NOT NULL,
---	numTeams INT NOT NULL,
---	ppr FLOAT NOT NULL,
---	numQbs FLOAT NOT NULL,
---	numWrs INT,
---	numRbs INT,
---	numTes INT,
---	isDynasty BOOLEAN NOT NULL
---);
+
+create table LeagueSettings(
+	leagueId TEXT NOT NULL,
+	numTeams INT NOT NULL,
+	ppr FLOAT NOT NULL,
+	numQbs FLOAT NOT NULL,
+	numWrs INT,
+	numRbs INT,
+	numTes INT,
+	isDynasty BOOLEAN NOT NULL,
+	CONSTRAINT fk_siteId FOREIGN KEY(siteId) REFERENCES FantasySite(siteId),
+	CONSTRAINT fk_leagueId FOREIGN KEY(leagueId) REFERENCES Leagues(leagueId)
+);
 --
 --create table Players(
 --    playerId INT NOT NULL AUTO_INCREMENT,

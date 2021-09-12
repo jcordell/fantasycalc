@@ -3,11 +3,13 @@ package fantasycalc.tradeparser.services.database
 import cats.effect.IO
 import doobie.implicits._
 import doobie.util.transactor.Transactor.Aux
-import fantasycalc.tradeparser.models.{LeagueId, Trade}
+import fantasycalc.tradeparser.models.{LeagueId, LeagueSettings, Trade}
 
 trait DatabaseService[F[_]] {
 
-  def storeLeague(leagueId: LeagueId): F[Int]
+  def storeLeagueId(leagueId: LeagueId): F[Int]
+
+  def storeLeagueSettings(leagueSettings: LeagueSettings): F[Int]
 
   def storeTrade(trade: Trade): F[Int]
 
@@ -15,7 +17,7 @@ trait DatabaseService[F[_]] {
 
 class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
 
-  override def storeLeague(leagueId: LeagueId): IO[Int] = {
+  override def storeLeagueId(leagueId: LeagueId): IO[Int] = {
     sql"insert into Leagues (leagueId, siteId) values ($leagueId, 1)".update.run.transact(xa)
   }
 
@@ -27,4 +29,6 @@ class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
 
   private val InsertTradedPlayer =
     "insert into TradedPlayers (playerId, tradeId, sideId) values (?, ?, ?)"
+
+  override def storeLeagueSettings(leagueSettings: LeagueSettings): IO[Int] = ???
 }

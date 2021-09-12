@@ -1,39 +1,39 @@
 package fantasycalc.tradeparser.services.fantasysite
 
 import cats.Monad
+import cats.effect.Concurrent
 import fantasycalc.tradeparser.models._
 import fantasycalc.tradeparser.services.database.DatabaseService
+import fantasycalc.tradeparser.services.messaging.Topics
 import fs2.Stream
 
-class FantasySiteUpdateService[F[_]: Monad](databaseService: DatabaseService[F]) {
-//  def parseTrades[F[_], T: FantasySite](
-//    site: FantasySiteService[F, T]
-//  ): Stream[F, List[Trade]] =
-//    parse(site, site.getTrades)
-//
-//  def parseLeagueSettings[F[_], T <: FantasySite](
-//    site: FantasySiteService[F, T]
-//  ): Stream[F, List[LeagueSettings]] =
-//    parse(site, site.getSettings)
-//
-  def mock[T <: FantasySite](
-    site: FantasySiteService[F, T]
-  ): Stream[F, String] =
+class FantasySiteUpdateService[F[_]: Monad: Concurrent, T <: FantasySite](
+  site: FantasySiteService[F, T],
+  topics: Topics[F],
+  databaseService: DatabaseService[F]
+) {
+
+  def stream: Stream[F, Int] =
+    streamLeagueIds
+      .merge(streamTrades)
+      .merge(streamLeagueSettings)
+
+  protected def streamLeagueIds: Stream[F, Nothing] =
     Stream
       .evalSeq(site.getLeagues)
-      .evalMap(mockFn)
+      .evalTap(databaseService.storeLeagueId)
+      .through(topics.leagueId.publish)
 
-  private def mockFn[T <: FantasySite]: LeagueId => F[String] = {
-    (id: LeagueId) => Monad[F].pure(id.id)
-  }
+  protected def streamTrades: Stream[F, Int] =
+    topics.leagueId
+      .subscribe(maxQueued = 100000)
+      .evalMap(site.getTrades)
+      .flatMap(fs2.Stream.apply(_: _*))
+      .evalMap(databaseService.storeTrade)
 
-//  private def parse[F[_], LeagueAttributeT, T <: FantasySite](
-//    site: FantasySiteService[F, T],
-//    parseFn: LeagueId => F[List[LeagueAttributeT]]
-//  ): Stream[F, List[LeagueAttributeT]] = {
-//    Stream
-//      .eval(site.getLeagues)
-//      .flatMap(x => fs2.Stream.apply(x: _*))
-//      .evalMap(parseFn)
-//  }
+  protected def streamLeagueSettings: Stream[F, Int] =
+    topics.leagueId
+      .subscribe(maxQueued = 100000)
+      .evalMap(site.getSettings)
+      .evalMap(databaseService.storeLeagueSettings)
 }
