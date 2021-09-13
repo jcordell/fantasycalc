@@ -3,13 +3,7 @@ package fantasycalc.tradeparser.clients
 import cats.effect.Concurrent
 import fantasycalc.tradeparser.models.ImplicitEntityCodecs._
 import fantasycalc.tradeparser.models.LeagueId
-import fantasycalc.tradeparser.models.api.mfl.{
-  LeagueApiResponse,
-  LeagueSearchApiResponse,
-  PlayersApiResponse,
-  RulesApiResponse,
-  TradesApiResponse
-}
+import fantasycalc.tradeparser.models.api.mfl._
 import io.circe.generic.auto._
 import org.http4s.client.Client
 

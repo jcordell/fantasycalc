@@ -2,7 +2,6 @@ package fantasycalc.tradeparser
 
 import cats.effect.{Async, ExitCode}
 import fantasycalc.tradeparser.clients.MflClientImpl
-import fantasycalc.tradeparser.models.FantasySite.MFL
 import fantasycalc.tradeparser.models.LeagueId
 import fantasycalc.tradeparser.modules.FantasySiteModule
 import fantasycalc.tradeparser.services.database.DatabaseService
@@ -12,13 +11,15 @@ import fantasycalc.tradeparser.services.fantasysite.scrapers.MflService
 import fantasycalc.tradeparser.services.messaging.Topics
 import fs2.Stream
 import fs2.concurrent.Topic
+import org.http4s.client.middleware.FollowRedirect
 import org.http4s.ember.client.EmberClientBuilder
 
 object TradeparserServer {
 
   def stream[F[_]: Async](databaseService: DatabaseService[F]): Stream[F, Nothing] = {
     for {
-      httpClient <- Stream.resource(EmberClientBuilder.default[F].build)
+      client <- Stream.resource(EmberClientBuilder.default[F].build)
+      httpClient = FollowRedirect.apply(5)(client)
 
       // TODO: Refactor these to modules
       mflModule = new FantasySiteModule[F](httpClient)
@@ -29,7 +30,7 @@ object TradeparserServer {
       leagueIdTopic <- Stream.eval(Topic.apply[F, LeagueId])
       topics = Topics(leagueIdTopic)
 
-      _ <- new FantasySiteUpdateService[F, MFL.type](mflService, topics,  databaseService).stream
+      _ <- new FantasySiteUpdateService[F](mflService, topics,  databaseService).stream
 
       exitCode = ExitCode.Success
     } yield exitCode

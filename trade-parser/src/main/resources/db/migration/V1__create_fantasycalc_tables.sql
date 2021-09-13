@@ -11,7 +11,7 @@ create table FantasySite (
 );
 
 create table Leagues(
-	leagueId VARCHAR(50) NOT NULL,
+	leagueId VARCHAR(50) NOT NULL UNIQUE,
 	siteId INTEGER NOT NULL,
 --	numTeams INT NOT NULL,
 --	ppr FLOAT NOT NULL,
@@ -24,7 +24,7 @@ create table Leagues(
 );
 
 create table LeagueSettings(
-	leagueId TEXT NOT NULL,
+	leagueId VARCHAR(50) NOT NULL,
 	numTeams INT NOT NULL,
 	ppr FLOAT NOT NULL,
 	numQbs FLOAT NOT NULL,
@@ -32,7 +32,6 @@ create table LeagueSettings(
 	numRbs INT,
 	numTes INT,
 	isDynasty BOOLEAN NOT NULL,
-	CONSTRAINT fk_siteId FOREIGN KEY(siteId) REFERENCES FantasySite(siteId),
 	CONSTRAINT fk_leagueId FOREIGN KEY(leagueId) REFERENCES Leagues(leagueId)
 );
 --

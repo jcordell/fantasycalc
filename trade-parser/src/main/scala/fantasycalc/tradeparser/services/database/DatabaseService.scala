@@ -18,7 +18,7 @@ trait DatabaseService[F[_]] {
 class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
 
   override def storeLeagueId(leagueId: LeagueId): IO[Int] = {
-    sql"insert into Leagues (leagueId, siteId) values ($leagueId, 1)".update.run.transact(xa)
+    sql"insert into Leagues (leagueId, siteId) values ($leagueId, 1) on conflict do nothing".update.run.transact(xa)
   }
 
   override def storeTrade(trade: Trade): IO[Int] = {

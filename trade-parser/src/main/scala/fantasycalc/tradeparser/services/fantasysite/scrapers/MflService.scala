@@ -11,7 +11,7 @@ import org.joda.time.Instant
 
 class MflService[F[_]: Monad](mflClient: MflClient[F],
                               playerIdConverter: PlayerIdConverter)
-    extends FantasySiteService[F, FantasySite.MFL.type] {
+    extends FantasySiteService[F] {
 
   // TODO: Search term should be 'a' to 'z' to fetch all leagues
   override def getLeagues: F[List[LeagueId]] =
@@ -47,6 +47,7 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
     } yield {
       LeagueSettings(
         leagueId,
+        // TODO: remove .toInt
         league.league.franchises.count.toInt,
         parseStartingRules(league.league.starters),
         parsePpr(rules.rules.positionRules)

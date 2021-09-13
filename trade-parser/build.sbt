@@ -25,6 +25,7 @@ lazy val root = (project in file("."))
       "org.tpolecat" %% "doobie-specs2" % DoobieVersion,
       "org.scalameta" %% "munit" % MunitVersion % Test,
       "org.typelevel" %% "munit-cats-effect-3" % MunitCatsEffectVersion % Test,
+      "org.typelevel" %% "cats-effect-testing-scalatest" % "1.1.1" % Test,
       "io.getquill" %% "quill-sql" % "3.10.0",
       "ch.qos.logback" % "logback-classic" % LogbackVersion,
       "mysql" % "mysql-connector-java" % "5.1.45",
