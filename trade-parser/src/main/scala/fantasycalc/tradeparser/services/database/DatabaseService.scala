@@ -30,5 +30,5 @@ class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
   private val InsertTradedPlayer =
     "insert into TradedPlayers (playerId, tradeId, sideId) values (?, ?, ?)"
 
-  override def storeLeagueSettings(leagueSettings: LeagueSettings): IO[Int] = ???
+  override def storeLeagueSettings(leagueSettings: LeagueSettings): IO[Int] = IO.pure(1)
 }

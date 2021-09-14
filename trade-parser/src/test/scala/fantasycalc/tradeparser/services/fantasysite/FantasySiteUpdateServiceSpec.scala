@@ -20,8 +20,11 @@ import org.scalatest.matchers.should.Matchers
 class FantasySiteUpdateServiceSpec extends AnyFunSpec with Matchers {
   implicit val runtime: IORuntime = global
 
+  /**
+    * TODO: Fix this test. It hangs, not sure why. It doesn't timeout during production code.
+    */
   ignore("stream") {
-    val expectedLeagueIds = List(LeagueId("1"), LeagueId("2"))
+    val expectedLeagueIds = List(LeagueId("1"))
 
     val fantasySiteService = new FantasySiteService[IO] {
       override def getLeagues: IO[List[LeagueId]] = {
