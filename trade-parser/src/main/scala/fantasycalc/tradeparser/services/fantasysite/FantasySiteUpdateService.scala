@@ -20,13 +20,10 @@ class FantasySiteUpdateService[F[_]: Monad: Concurrent](
 
   def stream: Stream[F, Any] =
     Stream(
-      restartStreamOnError(streamTrades),
-      restartStreamOnError(streamLeagueSettings),
+      streamTrades.withRestartOnError,
+      streamLeagueSettings.withRestartOnError,
       streamLeagueIds
     ).parJoin(3)
-
-  def restartStreamOnError[A](stream: Stream[F, A]): Stream[F, Any] =
-    stream.handleErrorWith(err => Stream(Left(err)) ++ stream)
 
   def streamLeagueIds: Stream[F, LeagueId] =
     Stream

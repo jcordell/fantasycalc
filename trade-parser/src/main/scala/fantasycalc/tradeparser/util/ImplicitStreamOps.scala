@@ -1,8 +1,8 @@
 package fantasycalc.tradeparser.util
 
-import cats.{Monad, MonadError}
-import fs2.Stream
+import cats.MonadError
 import cats.implicits._
+import fs2.Stream
 
 object ImplicitStreamOps {
   implicit class implicitStreamOps[F[_], A](stream: Stream[F, A])(
@@ -25,6 +25,10 @@ object ImplicitStreamOps {
         .collect {
           case Right(setting) => setting
         }
+
+
+    def withRestartOnError: Stream[F, A] =
+      stream.handleErrorWith(_ => stream)
   }
 
   implicit class ImplicitStreamListOps[F[_], A](stream: Stream[F, List[A]]) {
