@@ -68,7 +68,7 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
                        position: MflPosition,
                        default: String): Int = {
     val parsedLimitOrDefault = mflStarterLimits.position
-      .find(_.name.contains(position))
+      .find(_.name.contains(position.entryName))
       .map(_.limit)
       .getOrElse {
         println(s"Could not find $position in MFL starter limits, using default.")
@@ -85,8 +85,8 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
       .filter(_.positions.contains(MflPosition.WR.entryName))
       .flatMap(_.rule)
     val parsedPprValueOrDefault = wideReceiverRules
-      .find(_.event.equals("CC"))
-      .map(_.points.`$t`)
+      .find(_.event.`$t`.contains("CC"))
+      .map(_.points.`$t`.replace("*", ""))
       .getOrElse {
         println("Could not find PPR value, using default")
         "1"

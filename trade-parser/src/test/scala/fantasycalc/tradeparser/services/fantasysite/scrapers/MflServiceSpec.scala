@@ -50,7 +50,6 @@ class MflServiceSpec extends AnyFunSpec with Matchers {
   }
 
   describe("getSettings") {
-    // TODO: Number of starter rules and PPR parsing isn't working yet
     it("should parse league settings") {
       val mflService =
         new MflService[Id](MockMflClient, new PlayerIdConverterMock)
@@ -61,7 +60,7 @@ class MflServiceSpec extends AnyFunSpec with Matchers {
       actual shouldBe LeagueSettings(
         leagueId = leagueId,
         numTeams = 12,
-        starters = Starters(1, 2, 2, 1),
+        starters = Starters(2, 2, 4, 2),
         ppr = 1,
         isDynasty = true
       )
