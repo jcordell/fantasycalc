@@ -50,7 +50,8 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
         // TODO: remove .toInt
         league.league.franchises.count.toInt,
         parseStartingRules(league.league.starters),
-        parsePpr(rules.rules.positionRules)
+        parsePpr(rules.rules.positionRules),
+        isDynasty = true // TODO
       )
     }
   }

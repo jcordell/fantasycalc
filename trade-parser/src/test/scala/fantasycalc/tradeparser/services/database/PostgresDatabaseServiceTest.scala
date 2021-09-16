@@ -54,12 +54,18 @@ class PostgresDatabaseServiceTest
     flyway.migrate()
   }
 
+  private val leagueId: LeagueId = LeagueId("1")
+  private val leagueSettings = LeagueSettings(leagueId, 10, Starters(1.5, 2, 2, 1), 0, isDynasty = true)
+
   describe("storeLeague") {
     it("should insert league ids") {
       val postgresDatabaseService =
         new PostgresDatabaseService(getDatabaseConnection)
 
-      val actual = postgresDatabaseService.storeLeagueId(LeagueId("1"))
+      val actual = postgresDatabaseService.storeLeague(
+        leagueId,
+        leagueSettings
+      )
       actual.unsafeRunSync() shouldBe 1
     }
   }
@@ -69,14 +75,14 @@ class PostgresDatabaseServiceTest
       val postgresDatabaseService =
         new PostgresDatabaseService(getDatabaseConnection)
       val trade = Trade(
-        LeagueId("1"),
+        leagueId,
         Instant.now,
         List(FantasycalcAssetId("1")),
         List(FantasycalcAssetId("2"))
       )
 
       val actual = (for {
-        _ <- postgresDatabaseService.storeLeagueId(LeagueId("1"))
+        _ <- postgresDatabaseService.storeLeague(leagueId, leagueSettings)
         result <- postgresDatabaseService.storeTrade(trade)
       } yield result).unsafeRunSync()
 

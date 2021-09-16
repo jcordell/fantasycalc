@@ -12,18 +12,17 @@ import fantasycalc.tradeparser.models._
 
 trait DatabaseService[F[_]] {
 
-  def storeLeagueId(leagueId: LeagueId): F[Int]
-
-  def storeLeagueSettings(leagueSettings: LeagueSettings): F[Int]
+  def storeLeague(leagueId: LeagueId, settings: LeagueSettings): F[Int]
 
   def storeTrade(trade: Trade): F[Int]
-
 }
 
 class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
 
-  override def storeLeagueId(leagueId: LeagueId): IO[Int] = {
-    sql"insert into Leagues (leagueId, siteId) values ($leagueId, 1) on conflict do nothing".update.run
+  override def storeLeague(leagueId: LeagueId,
+                           settings: LeagueSettings): IO[Int] = {
+    // TODO: real siteID
+    sql"insert into Leagues values (${leagueId.id}, 1, ${settings.numTeams}, ${settings.ppr}, ${settings.starters.quarterback}, ${settings.isDynasty}) on conflict do nothing".update.run
       .transact(xa)
   }
 
@@ -51,7 +50,4 @@ class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
     trade.side1.map(asset => generateTradedPlayerSql(tradeId, asset, 1)) ++
       trade.side2.map(asset => generateTradedPlayerSql(tradeId, asset, 2))
   }
-
-  override def storeLeagueSettings(leagueSettings: LeagueSettings): IO[Int] =
-    IO.pure(1)
 }

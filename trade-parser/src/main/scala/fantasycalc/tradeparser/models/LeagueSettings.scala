@@ -9,4 +9,5 @@ case class Starters(quarterback: BigDecimal,
 case class LeagueSettings(leagueId: LeagueId,
                           numTeams: Int,
                           starters: Starters,
-                          ppr: BigDecimal)
+                          ppr: BigDecimal,
+                          isDynasty: Boolean)

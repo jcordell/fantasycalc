@@ -28,7 +28,6 @@ class FantasySiteUpdateService[F[_]: Monad: Concurrent](
   def streamLeagueIds: Stream[F, LeagueId] =
     Stream
       .evalSeq(site.getLeagues)
-      .evalTap(databaseService.storeLeagueId)
       .evalTap(topics.leagueId.publish1)
 
   def streamTrades: Stream[F, Int] =
@@ -42,5 +41,7 @@ class FantasySiteUpdateService[F[_]: Monad: Concurrent](
     topics.leagueId
       .subscribe(maxQueued = 100000)
       .evalMapSafe(site.getSettings)
-      .evalMapSafe(databaseService.storeLeagueSettings)
+      .evalMapSafe(
+        settings => databaseService.storeLeague(settings.leagueId, settings)
+      )
 }

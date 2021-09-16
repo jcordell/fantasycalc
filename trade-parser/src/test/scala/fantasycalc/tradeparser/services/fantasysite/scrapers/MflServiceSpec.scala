@@ -104,10 +104,11 @@ class MflServiceSpec extends AnyFunSpec with Matchers {
       val actual = mflService.getSettings(leagueId)
 
       actual shouldBe LeagueSettings(
-        leagueId,
-        12,
-        Starters(1, 2, 2, 1),
-        1
+        leagueId = leagueId,
+        numTeams = 12,
+        starters = Starters(1, 2, 2, 1),
+        ppr = 1,
+        isDynasty = true
       )
     }
   }
