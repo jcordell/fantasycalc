@@ -34,25 +34,25 @@ create table LeagueSettings(
 	isDynasty BOOLEAN NOT NULL,
 	CONSTRAINT fk_leagueId FOREIGN KEY(leagueId) REFERENCES Leagues(leagueId)
 );
---
---create table Players(
---    playerId INT NOT NULL AUTO_INCREMENT,
---	name TEXT NOT NULL,
---	mfl_id TEXT
---);
---
---create table Trades(
---    tradeId INT NOT NULL AUTO_INCREMENT,
---    leagueId TEXT NOT NULL,
---    FOREIGN KEY (leaugeId) REFERENCES Leagues(leagueId)
---);
---
---create table TradedPlayers(
---    playerId INT NOT NULL,
---    tradeId INT NOT NULL,
---    tradeSide INT NOT NULL,
---    FOREIGN KEY (playerId) REFERENCES Players(playerId),
---    FOREIGN KEY (tradeId) REFERENCES Trades(tradeId)
---);
+
+create table Players(
+    playerId TEXT NOT NULL UNIQUE,
+	name TEXT NOT NULL,
+	mfl_id TEXT
+);
+
+create table Trades(
+    tradeId UUID NOT NULL UNIQUE,
+    leagueId VARCHAR(50) NOT NULL,
+	CONSTRAINT fk_leagueId FOREIGN KEY(leagueId) REFERENCES Leagues(leagueId)
+);
+
+create table TradedPlayers(
+    tradeId UUID NOT NULL,
+    playerId TEXT NOT NULL,
+    tradeSide INT NOT NULL,
+--    FOREIGN KEY (playerId) REFERENCES Players(playerId), // TODO: Need to setup player database/map from id -> name
+    FOREIGN KEY (tradeId) REFERENCES Trades(tradeId)
+);
 
 INSERT INTO FantasySite VALUES (1, 'MFL');

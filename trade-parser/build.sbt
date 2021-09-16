@@ -5,6 +5,7 @@ val LogbackVersion = "1.2.5"
 val MunitCatsEffectVersion = "1.0.5"
 val EnumeratumVersion = "1.7.0"
 val DoobieVersion = "1.0.0-RC1"
+val TestContainersScalaVersion = "0.39.7"
 
 lazy val root = (project in file("."))
   .settings(
@@ -26,6 +27,9 @@ lazy val root = (project in file("."))
       "org.scalameta" %% "munit" % MunitVersion % Test,
       "org.typelevel" %% "munit-cats-effect-3" % MunitCatsEffectVersion % Test,
       "org.typelevel" %% "cats-effect-testing-scalatest" % "1.1.1" % Test,
+      "org.flywaydb" % "flyway-core" % "7.7.0",
+      "com.dimafeng" %% "testcontainers-scala-scalatest" % TestContainersScalaVersion % "test",
+      "com.dimafeng" %% "testcontainers-scala-postgresql" % TestContainersScalaVersion % "test",
       "io.getquill" %% "quill-sql" % "3.10.0",
       "ch.qos.logback" % "logback-classic" % LogbackVersion,
       "mysql" % "mysql-connector-java" % "5.1.45",
@@ -64,18 +68,22 @@ enablePlugins(FlywayPlugin)
 val env = scala.util.Properties.envOrElse("SCALA_ENV", "")
 
 val postgresDatabase = env match {
-  case "test" => scala.util.Properties.envOrElse("API_POSTGRES_TEST_DATABASE", "http4s_api_test")
-  case _ => scala.util.Properties.envOrElse("API_POSTGRES_DATABASE", "fantasycalc_db")
+  case "test" =>
+    scala.util.Properties
+      .envOrElse("API_POSTGRES_TEST_DATABASE", "http4s_api_test")
+  case _ =>
+    scala.util.Properties.envOrElse("API_POSTGRES_DATABASE", "fantasycalc_db")
 }
 
 val postgresUser = env match {
-  case "test" => scala.util.Properties.envOrElse("API_POSTGRES_TEST_USER", "postgres")
+  case "test" =>
+    scala.util.Properties.envOrElse("API_POSTGRES_TEST_USER", "postgres")
   case _ => scala.util.Properties.envOrElse("API_POSTGRES_USER", "postgres")
 }
 
 val postgresPassword = env match {
   case "test" => scala.util.Properties.envOrElse("API_POSTGRES_TEST_PASS", "")
-  case _ => scala.util.Properties.envOrElse("API_POSTGRES_PASS", "password")
+  case _      => scala.util.Properties.envOrElse("API_POSTGRES_PASS", "password")
 }
 
 flywayUrl := s"jdbc:postgresql:$postgresDatabase"
