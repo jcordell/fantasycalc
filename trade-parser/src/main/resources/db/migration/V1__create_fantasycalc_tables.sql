@@ -24,9 +24,10 @@ create table Leagues(
 );
 
 create table Players(
-    playerId TEXT NOT NULL UNIQUE,
+    playerId INTEGER NOT NULL UNIQUE,
 	name TEXT NOT NULL,
-	mfl_id TEXT
+	mfl_id TEXT NOT NULL,
+	position TEXT NOT NULL
 );
 
 create table Trades(
@@ -37,9 +38,9 @@ create table Trades(
 
 create table TradedPlayers(
     tradeId UUID NOT NULL,
-    playerId TEXT NOT NULL,
+    playerId INTEGER NOT NULL,
     tradeSide INT NOT NULL,
---    FOREIGN KEY (playerId) REFERENCES Players(playerId), // TODO: Need to setup player database/map from id -> name
+    FOREIGN KEY (playerId) REFERENCES Players(playerId),
     FOREIGN KEY (tradeId) REFERENCES Trades(tradeId)
 );
 
