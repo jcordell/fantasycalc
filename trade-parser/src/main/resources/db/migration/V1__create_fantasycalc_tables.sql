@@ -30,6 +30,7 @@ create table Players(
 	position TEXT NOT NULL
 );
 
+-- TODO: Need a way to ignore duplicate trades
 create table Trades(
     tradeId UUID NOT NULL UNIQUE,
     leagueId VARCHAR(50) NOT NULL,

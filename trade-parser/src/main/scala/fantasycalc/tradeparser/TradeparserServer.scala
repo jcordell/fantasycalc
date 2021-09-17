@@ -33,6 +33,9 @@ object TradeparserServer {
         )
       )
 
+      players <- Stream.eval(databaseService.getPlayers)
+      _ = println(players)
+
       // TODO: Refactor these to modules
       mflModule = new FantasySiteModule[F](httpClient)
       mflClient = new MflClientImpl[F](httpClient)

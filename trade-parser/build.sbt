@@ -34,6 +34,7 @@ lazy val root = (project in file("."))
       "ch.qos.logback" % "logback-classic" % LogbackVersion,
       "mysql" % "mysql-connector-java" % "5.1.45",
       "com.beachape" %% "enumeratum" % EnumeratumVersion,
+      "com.beachape" %% "enumeratum-doobie" % EnumeratumVersion,
       "org.scalameta" %% "svm-subs" % "20.2.0",
       "org.scalactic" %% "scalactic" % "3.2.9",
       "joda-time" % "joda-time" % "2.10.10",

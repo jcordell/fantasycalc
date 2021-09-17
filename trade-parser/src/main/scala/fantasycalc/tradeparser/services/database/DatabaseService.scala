@@ -5,16 +5,23 @@ import java.util.UUID
 import cats.effect.IO
 import cats.effect.std.UUIDGen
 import cats.implicits._
-import doobie.implicits._
+import cats._, cats.data._, cats.implicits._
+import doobie._, doobie.implicits._
+import io.circe._, io.circe.jawn._, io.circe.syntax._
+import java.awt.Point
+import org.postgresql.util.PGobject
 import doobie.util.fragment.Fragment
 import doobie.util.transactor.Transactor.Aux
 import fantasycalc.tradeparser.models._
+import enumeratum._
 
 trait DatabaseService[F[_]] {
 
   def storeLeague(leagueId: LeagueId, settings: LeagueSettings): F[Int]
 
   def storeTrade(trade: Trade): F[Int]
+
+  def getPlayers: F[List[Player]]
 }
 
 class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
@@ -45,9 +52,14 @@ class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
     def generateTradedPlayerSql(uuid: UUID,
                                 asset: FantasycalcAssetId,
                                 tradeSide: Int) =
-      sql"INSERT INTO TradedPlayers VALUES (${uuid.toString}::uuid, ${asset.id}, $tradeSide)"
+      // TODO: Should be able to remove this .toInt once finished changing the assetId type
+      sql"INSERT INTO TradedPlayers VALUES (${uuid.toString}::uuid, ${asset.id.toInt}, $tradeSide)"
 
     trade.side1.map(asset => generateTradedPlayerSql(tradeId, asset, 1)) ++
       trade.side2.map(asset => generateTradedPlayerSql(tradeId, asset, 2))
+  }
+
+  override def getPlayers: IO[List[Player]] = {
+    sql"SELECT * from Players".query[Player].stream.compile.toList.transact(xa)
   }
 }

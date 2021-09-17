@@ -1,3 +1,8 @@
 package fantasycalc.tradeparser.models
 
-case class Player (id: FantasycalcAssetId, name: PlayerName)
+import fantasycalc.tradeparser.models.api.mfl.MflId
+
+case class Player(id: FantasycalcAssetId,
+                  name: PlayerName,
+                  mflId: MflId,
+                  position: Position)
