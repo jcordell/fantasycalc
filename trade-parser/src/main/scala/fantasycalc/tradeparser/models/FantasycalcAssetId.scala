@@ -6,5 +6,4 @@ package fantasycalc.tradeparser.models
   *
   * Can represent players or picks. // TODO: Add picks to database CSV
   */
-// TODO: This should be an integer
-case class FantasycalcAssetId(id: String)
+case class FantasycalcAssetId(id: Int)

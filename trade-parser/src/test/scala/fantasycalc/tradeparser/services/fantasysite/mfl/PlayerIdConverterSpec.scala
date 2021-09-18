@@ -18,7 +18,7 @@ class PlayerIdConverterSpec extends AnyFunSpec with Matchers {
         new PlayerIdConverter(
           List(
             Player(
-              id = FantasycalcAssetId("100"),
+              id = FantasycalcAssetId(100),
               name = PlayerName("Player 1"),
               mflId = MflId("1"),
               position = Position.WR
@@ -27,7 +27,7 @@ class PlayerIdConverterSpec extends AnyFunSpec with Matchers {
         )
 
       val actual = playerIdConverter.toFantasycalcAssetId(MflId("1"))
-      actual shouldBe Some(FantasycalcAssetId("100"))
+      actual shouldBe Some(FantasycalcAssetId(100))
 
     }
   }

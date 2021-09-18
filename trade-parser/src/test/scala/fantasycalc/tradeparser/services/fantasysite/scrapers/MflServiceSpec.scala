@@ -42,8 +42,8 @@ class MflServiceSpec extends AnyFunSpec with Matchers {
       actual.head shouldBe Trade(
         leagueId,
         Instant.parse("2021-09-01T22:14:35.000Z"),
-        List(FantasycalcAssetId("15287")),
-        List(FantasycalcAssetId("14141"), FantasycalcAssetId("FP_0010_2022_3"))
+        List(FantasycalcAssetId(15287)),
+        List(FantasycalcAssetId(14141), FantasycalcAssetId(1020223))
       )
       actual.length shouldBe 10
     }

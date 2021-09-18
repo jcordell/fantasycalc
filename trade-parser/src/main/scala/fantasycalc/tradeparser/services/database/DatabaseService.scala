@@ -47,8 +47,7 @@ class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
     def generateTradedPlayerSql(uuid: UUID,
                                 asset: FantasycalcAssetId,
                                 tradeSide: Int) =
-      // TODO: Should be able to remove this .toInt once finished changing the assetId type
-      sql"INSERT INTO TradedPlayers VALUES (${uuid.toString}::uuid, ${asset.id.toInt}, $tradeSide)"
+      sql"INSERT INTO TradedPlayers VALUES (${uuid.toString}::uuid, ${asset.id}, $tradeSide)"
 
     trade.side1.map(asset => generateTradedPlayerSql(tradeId, asset, 1)) ++
       trade.side2.map(asset => generateTradedPlayerSql(tradeId, asset, 2))

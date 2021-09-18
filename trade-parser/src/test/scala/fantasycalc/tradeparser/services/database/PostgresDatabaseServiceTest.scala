@@ -1,24 +1,11 @@
 package fantasycalc.tradeparser.services.database
 
 import cats.effect.IO
-import java.util.UUID
-
-import cats.effect.IO
-import cats.effect.std.UUIDGen
-import cats.implicits._
-import cats._, cats.data._, cats.implicits._
-import doobie._, doobie.implicits._
-import io.circe._, io.circe.jawn._, io.circe.syntax._
-import java.awt.Point
-import org.postgresql.util.PGobject
-import doobie.util.fragment.Fragment
-import doobie.util.transactor.Transactor.Aux
-import fantasycalc.tradeparser.models._
-import enumeratum._
 import cats.effect.unsafe.IORuntime
 import cats.effect.unsafe.IORuntime.global
 import com.dimafeng.testcontainers.{ForEachTestContainer, PostgreSQLContainer}
 import doobie.Transactor
+import doobie.implicits._
 import doobie.util.transactor.Transactor.Aux
 import fantasycalc.tradeparser.models._
 import fantasycalc.tradeparser.models.api.mfl.MflId
@@ -72,7 +59,7 @@ class PostgresDatabaseServiceTest
 
   def insertMockPlayers(): IO[Int] = {
     val player = Player(
-      FantasycalcAssetId("1"),
+      FantasycalcAssetId(1),
       PlayerName("player name"),
       MflId("100"),
       Position.WR
@@ -102,8 +89,8 @@ class PostgresDatabaseServiceTest
       val trade = Trade(
         leagueId,
         Instant.now,
-        List(FantasycalcAssetId("1")),
-        List(FantasycalcAssetId("2"))
+        List(FantasycalcAssetId(1)),
+        List(FantasycalcAssetId(2))
       )
 
       val actual = (for {
