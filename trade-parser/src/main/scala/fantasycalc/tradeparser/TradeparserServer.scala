@@ -12,12 +12,7 @@ import fantasycalc.tradeparser.services.messaging.Topics
 import fs2.Stream
 import fs2.concurrent.Topic
 import org.http4s.client.Client
-import org.http4s.client.middleware.{
-  FollowRedirect,
-  Logger,
-  RequestLogger,
-  ResponseLogger
-}
+import org.http4s.client.middleware._
 import org.http4s.ember.client.EmberClientBuilder
 
 object TradeparserServer {
@@ -33,15 +28,15 @@ object TradeparserServer {
         )
       )
 
-      players <- Stream.eval(databaseService.getPlayers)
-      _ = println(players)
-
       // TODO: Refactor these to modules
       mflModule = new FantasySiteModule[F](httpClient)
       mflClient = new MflClientImpl[F](httpClient)
-      playersApiResponse <- Stream.eval(mflClient.getPlayers)
-      playerIdConverter = new PlayerIdConverter(playersApiResponse)
+
+      players <- Stream.eval(databaseService.getPlayers)
+      playerIdConverter = new PlayerIdConverter(players)
+
       mflService = new MflService[F](mflClient, playerIdConverter)
+
       leagueIdTopic <- Stream.eval(Topic.apply[F, LeagueId])
       topics = Topics(leagueIdTopic)
 
