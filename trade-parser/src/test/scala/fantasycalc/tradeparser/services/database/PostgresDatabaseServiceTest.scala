@@ -1,12 +1,27 @@
 package fantasycalc.tradeparser.services.database
 
 import cats.effect.IO
+import java.util.UUID
+
+import cats.effect.IO
+import cats.effect.std.UUIDGen
+import cats.implicits._
+import cats._, cats.data._, cats.implicits._
+import doobie._, doobie.implicits._
+import io.circe._, io.circe.jawn._, io.circe.syntax._
+import java.awt.Point
+import org.postgresql.util.PGobject
+import doobie.util.fragment.Fragment
+import doobie.util.transactor.Transactor.Aux
+import fantasycalc.tradeparser.models._
+import enumeratum._
 import cats.effect.unsafe.IORuntime
 import cats.effect.unsafe.IORuntime.global
 import com.dimafeng.testcontainers.{ForEachTestContainer, PostgreSQLContainer}
 import doobie.Transactor
 import doobie.util.transactor.Transactor.Aux
 import fantasycalc.tradeparser.models._
+import fantasycalc.tradeparser.models.api.mfl.MflId
 import org.flywaydb.core.Flyway
 import org.flywaydb.core.api.Location
 import org.flywaydb.core.api.configuration.ClassicConfiguration
@@ -29,9 +44,10 @@ class PostgresDatabaseServiceTest
 
   override def beforeEach(): Unit = {
     runMigrations
+    insertMockPlayers().unsafeRunSync()
   }
 
-  def getDatabaseConnection: Aux[IO, Unit] =
+  lazy val databaseConnection: Aux[IO, Unit] =
     Transactor.fromDriverManager[IO](
       driver = container.driverClassName,
       url = container.jdbcUrl,
@@ -54,18 +70,27 @@ class PostgresDatabaseServiceTest
     flyway.migrate()
   }
 
+  def insertMockPlayers(): IO[Int] = {
+    val player = Player(
+      FantasycalcAssetId("1"),
+      PlayerName("player name"),
+      MflId("100"),
+      Position.WR
+    )
+    sql"INSERT INTO Players VALUES (${player.id.id}, ${player.name.name}, ${player.mflId.id}, ${player.position.entryName}".update.run
+      .transact(databaseConnection)
+  }
+
   private val leagueId: LeagueId = LeagueId("1")
-  private val leagueSettings = LeagueSettings(leagueId, 10, Starters(1.5, 2, 2, 1), 0, isDynasty = true)
+  private val leagueSettings =
+    LeagueSettings(leagueId, 10, Starters(1.5, 2, 2, 1), 0, isDynasty = true)
 
   describe("storeLeague") {
     it("should insert league ids") {
       val postgresDatabaseService =
-        new PostgresDatabaseService(getDatabaseConnection)
+        new PostgresDatabaseService(databaseConnection)
 
-      val actual = postgresDatabaseService.storeLeague(
-        leagueId,
-        leagueSettings
-      )
+      val actual = postgresDatabaseService.storeLeague(leagueId, leagueSettings)
       actual.unsafeRunSync() shouldBe 1
     }
   }
@@ -73,7 +98,7 @@ class PostgresDatabaseServiceTest
   describe("storeTrades") {
     it("should insert correct number of trades") {
       val postgresDatabaseService =
-        new PostgresDatabaseService(getDatabaseConnection)
+        new PostgresDatabaseService(databaseConnection)
       val trade = Trade(
         leagueId,
         Instant.now,

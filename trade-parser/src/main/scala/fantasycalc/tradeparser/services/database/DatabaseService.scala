@@ -5,15 +5,10 @@ import java.util.UUID
 import cats.effect.IO
 import cats.effect.std.UUIDGen
 import cats.implicits._
-import cats._, cats.data._, cats.implicits._
-import doobie._, doobie.implicits._
-import io.circe._, io.circe.jawn._, io.circe.syntax._
-import java.awt.Point
-import org.postgresql.util.PGobject
+import doobie.implicits._
 import doobie.util.fragment.Fragment
 import doobie.util.transactor.Transactor.Aux
 import fantasycalc.tradeparser.models._
-import enumeratum._
 
 trait DatabaseService[F[_]] {
 
