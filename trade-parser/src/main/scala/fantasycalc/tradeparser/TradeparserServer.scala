@@ -14,6 +14,7 @@ import fs2.concurrent.Topic
 import org.http4s.client.Client
 import org.http4s.client.middleware._
 import org.http4s.ember.client.EmberClientBuilder
+import scala.concurrent.duration._
 
 object TradeparserServer {
 
@@ -40,7 +41,7 @@ object TradeparserServer {
       leagueIdTopic <- Stream.eval(Topic.apply[F, LeagueId])
       topics = Topics(leagueIdTopic)
 
-      _ <- new FantasySiteUpdateService[F](mflService, topics, databaseService).stream
+      _ <- new FantasySiteUpdateService[F](mflService, topics, databaseService, 10.seconds).stream
 
       exitCode = ExitCode.Success
     } yield exitCode
