@@ -8,10 +8,11 @@ import fantasycalc.tradeparser.services.fantasysite.FantasySiteUpdateService
 import fantasycalc.tradeparser.services.fantasysite.mfl.PlayerIdConverter
 import fantasycalc.tradeparser.services.fantasysite.scrapers.MflService
 import fs2.Stream
+import org.http4s.blaze.client.BlazeClientBuilder
 import org.http4s.client.Client
 import org.http4s.client.middleware._
-import org.http4s.ember.client.EmberClientBuilder
 
+import scala.concurrent.ExecutionContext.global
 import scala.concurrent.duration._
 
 object TradeparserServer {
@@ -20,10 +21,11 @@ object TradeparserServer {
     databaseService: DatabaseService[F]
   ): Stream[F, Nothing] = {
     for {
-      client <- Stream.resource(EmberClientBuilder.default[F].build)
+      // TODO: Should be able to swtich back to EmberClientBuilder once https://github.com/http4s/http4s/issues/4935 is merged and deployed.
+      client <- BlazeClientBuilder[F](global).stream
       httpClient: Client[F] = ResponseLogger(logHeaders = true, logBody = true)(
         RequestLogger[F](logHeaders = true, logBody = true)(
-          FollowRedirect.apply(5)(client)
+          FollowRedirect.apply(100)(client)
         )
       )
 
@@ -36,7 +38,11 @@ object TradeparserServer {
 
       mflService = new MflService[F](mflClient, playerIdConverter)
 
-      _ <- new FantasySiteUpdateService[F](mflService, databaseService, 10.seconds).stream
+      _ <- new FantasySiteUpdateService[F](
+        mflService,
+        databaseService,
+        10.seconds
+      ).stream
 
       exitCode = ExitCode.Success
     } yield exitCode
