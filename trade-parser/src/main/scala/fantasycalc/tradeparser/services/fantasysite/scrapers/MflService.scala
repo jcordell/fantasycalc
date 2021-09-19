@@ -50,7 +50,7 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
         // TODO: remove .toInt
         league.league.franchises.count.toInt,
         parseStartingRules(league.league.starters),
-        parsePpr(rules.rules.positionRules),
+        parsePprRules(mapToRules(rules.rules.positionRules)),
         isDynasty = true // TODO
       )
     }
@@ -80,7 +80,13 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
     }
   }
 
-  private def parsePpr(rules: List[PositionRules]): Int = {
+  private def mapToRules(rules: List[MflPositionRules]) =
+    rules.map {
+      case rule: PositionRule => PositionRules(rule.positions, List(rule.rule))
+      case rules: PositionRules => rules
+    }
+
+  private def parsePprRules(rules: List[PositionRules]): Int = {
     val wideReceiverRules = rules
       .filter(_.positions.contains(MflPosition.WR.entryName))
       .flatMap(_.rule)

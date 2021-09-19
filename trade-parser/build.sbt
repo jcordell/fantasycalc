@@ -45,7 +45,16 @@ lazy val root = (project in file("."))
       "org.typelevel" %% "kind-projector" % "0.13.0" cross CrossVersion.full
     ),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
-    testFrameworks += new TestFramework("munit.Framework")
+    testFrameworks += new TestFramework("munit.Framework"),
+    scalacOptions ++= Seq(
+      "-deprecation",
+      "-unchecked",
+      "-language:implicitConversions",
+      "-language:higherKinds",
+      "-language:existentials",
+      "-language:postfixOps",
+      "-Ymacro-annotations"
+    )
 //    resolvers += "Artima Maven Repository" at "https://repo.artima.com/releases"
   )
 
