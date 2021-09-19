@@ -7,14 +7,16 @@ import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.prop.TableDrivenPropertyChecks._
 import org.scalatest.prop.TableFor2
+import io.circe.generic.auto._
 
 import scala.util.{Success, Try}
 
 class JsonFileLoaderTest extends AnyFunSpec with Matchers {
-  private val apiEndpoints: TableFor2[String, String => RulesApiResponse] =
+  private val apiEndpoints: TableFor2[String, String => Product] =
     Table(
       ("directory", "File loader"),
-      ("mfl/rules", JsonUtils.load[RulesApiResponse])
+      ("mfl/rules", JsonUtils.load[RulesApiResponse]),
+      ("mfl/trades", JsonUtils.load[TradesApiResponse]),
     )
 
   describe("Can parse JSON api responses") {

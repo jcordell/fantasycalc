@@ -1,0 +1,134 @@
+{
+  "version": "1.0",
+  "transactions": {
+    "transaction": [
+      {
+        "franchise2": "0002",
+        "franchise2_gave_up": "10276,",
+        "timestamp": "1631820078",
+        "franchise": "0008",
+        "franchise1_gave_up": "FP_0008_2022_3,FP_0008_2022_4,",
+        "type": "TRADE",
+        "expires": "1632268800"
+      },
+      {
+        "franchise2": "0004",
+        "franchise2_gave_up": "12620,",
+        "timestamp": "1629125188",
+        "franchise": "0003",
+        "franchise1_gave_up": "14080,14832,",
+        "type": "TRADE",
+        "expires": "1629381600"
+      },
+      {
+        "franchise2": "0008",
+        "franchise2_gave_up": "FP_0008_2022_1,",
+        "timestamp": "1621280830",
+        "franchise": "0001",
+        "franchise1_gave_up": "10700,",
+        "type": "TRADE",
+        "expires": "1621537200"
+      },
+      {
+        "franchise2": "0009",
+        "franchise2_gave_up": "DP_3_0,",
+        "timestamp": "1620216408",
+        "franchise": "0004",
+        "franchise1_gave_up": "BB_50,",
+        "type": "TRADE",
+        "expires": "1620460800"
+      },
+      {
+        "franchise2": "0004",
+        "franchise2_gave_up": "BB_100,",
+        "timestamp": "1620175521",
+        "franchise": "0011",
+        "franchise1_gave_up": "DP_2_7,",
+        "type": "TRADE",
+        "expires": "1620432000"
+      },
+      {
+        "franchise2": "0005",
+        "franchise2_gave_up": "BB_50,",
+        "timestamp": "1620164304",
+        "franchise": "0001",
+        "franchise1_gave_up": "DP_3_2,",
+        "type": "TRADE",
+        "expires": "1620421200"
+      },
+      {
+        "franchise2": "0011",
+        "franchise2_gave_up": "DP_0_3,",
+        "timestamp": "1620061410",
+        "franchise": "0009",
+        "franchise1_gave_up": "DP_0_5,DP_2_4,DP_2_7,",
+        "type": "TRADE",
+        "expires": "1620604800"
+      },
+      {
+        "franchise2": "0001",
+        "franchise2_gave_up": "DP_0_2,DP_2_2,",
+        "timestamp": "1620052422",
+        "franchise": "0010",
+        "franchise1_gave_up": "DP_0_1,",
+        "type": "TRADE",
+        "expires": "1620309600"
+      },
+      {
+        "franchise2": "0010",
+        "franchise2_gave_up": "14122,DP_1_3,",
+        "timestamp": "1615828191",
+        "franchise": "0004",
+        "franchise1_gave_up": "11886,13164,",
+        "type": "TRADE",
+        "expires": "1616086800"
+      },
+      {
+        "franchise2": "0010",
+        "franchise2_gave_up": "14875,",
+        "timestamp": "1615671262",
+        "franchise": "0004",
+        "franchise1_gave_up": "14113,",
+        "type": "TRADE",
+        "expires": "1615924800"
+      },
+      {
+        "franchise2": "0004",
+        "franchise2_gave_up": "14846,DP_0_4,",
+        "timestamp": "1615663622",
+        "franchise": "0006",
+        "franchise1_gave_up": "14102,",
+        "type": "TRADE",
+        "expires": "1615914000"
+      },
+      {
+        "franchise2": "0008",
+        "franchise2_gave_up": "9431,13630,DP_1_4,DP_2_4,",
+        "timestamp": "1615121405",
+        "franchise": "0009",
+        "franchise1_gave_up": "12611,14800,14136,DP_3_3,",
+        "type": "TRADE",
+        "expires": "1615680000"
+      },
+      {
+        "franchise2": "0004",
+        "franchise2_gave_up": "14838,",
+        "timestamp": "1615084581",
+        "franchise": "0006",
+        "franchise1_gave_up": "DP_1_2,DP_2_1,",
+        "type": "TRADE",
+        "expires": "1615341600"
+      },
+      {
+        "franchise2": "0010",
+        "franchise2_gave_up": "DP_2_1,",
+        "timestamp": "1614827943",
+        "franchise": "0006",
+        "franchise1_gave_up": "12447,",
+        "type": "TRADE",
+        "expires": "1615082400"
+      }
+    ]
+  },
+  "encoding": "utf-8"
+}
