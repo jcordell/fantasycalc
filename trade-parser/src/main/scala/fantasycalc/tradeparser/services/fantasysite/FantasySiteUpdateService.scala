@@ -4,9 +4,9 @@ import cats.effect.{Concurrent, Temporal}
 import cats.{Monad, MonadError}
 import fantasycalc.tradeparser.models.LeagueId
 import fantasycalc.tradeparser.services.database.DatabaseService
-import fantasycalc.tradeparser.services.messaging.Topics
 import fs2.Stream
 import fantasycalc.tradeparser.util.ImplicitStreamOps._
+import cats.implicits._
 
 import scala.concurrent.duration._
 
@@ -16,36 +16,27 @@ import scala.concurrent.duration._
   */
 class FantasySiteUpdateService[F[_]: Monad: Concurrent: Temporal](
   site: FantasySiteService[F],
-  topics: Topics[F],
   databaseService: DatabaseService[F],
   rateLimit: FiniteDuration
 )(implicit monadError: MonadError[F, Throwable]) {
 
-  def stream: Stream[F, Any] =
-    Stream(
-      streamTrades.withRestartOnError,
-      streamLeagueSettings.withRestartOnError,
-      streamLeagueIds
-    ).parJoin(3)
-
-  def streamLeagueIds: Stream[F, LeagueId] =
+  def stream: Stream[F, Int] =
     Stream
       .evalSeq(site.getLeagues)
       .metered(rateLimit)
-      .evalTap(topics.leagueId.publish1)
+      .evalTapSafe(updateLeagueSettings)
+      .flatMap(t => updateTrades(t))
 
-  def streamTrades: Stream[F, Int] =
-    topics.leagueId
-      .subscribe(maxQueued = 100000)
+  def updateTrades(leagueId: LeagueId): Stream[F, Int] =
+    Stream[F, LeagueId](leagueId)
       .evalMapSafe(site.getTrades)
       .flattenList
       .evalMapSafe(databaseService.storeTrade)
 
-  def streamLeagueSettings: Stream[F, Int] =
-    topics.leagueId
-      .subscribe(maxQueued = 100000)
-      .evalMapSafe(site.getSettings)
-      .evalMapSafe(
-        settings => databaseService.storeLeague(settings.leagueId, settings)
-      )
+  def updateLeagueSettings(leagueId: LeagueId): F[Int] = {
+    for {
+      settings <- site.getSettings(leagueId)
+      numUpdatedRows <- databaseService.storeLeague(leagueId, settings)
+    } yield numUpdatedRows
+  }
 }

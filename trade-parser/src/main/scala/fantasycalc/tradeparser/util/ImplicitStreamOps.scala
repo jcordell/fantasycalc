@@ -26,6 +26,19 @@ object ImplicitStreamOps {
           case Right(setting) => setting
         }
 
+    /**
+      * Safely attempt effect and emit the successful results, ignoring failures.
+      */
+    def evalTapSafe[OutputT](fa: A => F[OutputT]): Stream[F, A] =
+      stream
+        .evalTap(value => {
+          MonadError[F, Throwable].attempt(fa(value)).map {
+            case Right(value) => Right(value)
+            case Left(throwable) =>
+              println("Error processing stream", throwable)
+              Left(throwable)
+          }
+        })
 
     def withRestartOnError: Stream[F, A] =
       stream.handleErrorWith(_ => stream)

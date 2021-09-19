@@ -2,18 +2,16 @@ package fantasycalc.tradeparser
 
 import cats.effect.{Async, ExitCode}
 import fantasycalc.tradeparser.clients.MflClientImpl
-import fantasycalc.tradeparser.models.LeagueId
 import fantasycalc.tradeparser.modules.FantasySiteModule
 import fantasycalc.tradeparser.services.database.DatabaseService
 import fantasycalc.tradeparser.services.fantasysite.FantasySiteUpdateService
 import fantasycalc.tradeparser.services.fantasysite.mfl.PlayerIdConverter
 import fantasycalc.tradeparser.services.fantasysite.scrapers.MflService
-import fantasycalc.tradeparser.services.messaging.Topics
 import fs2.Stream
-import fs2.concurrent.Topic
 import org.http4s.client.Client
 import org.http4s.client.middleware._
 import org.http4s.ember.client.EmberClientBuilder
+
 import scala.concurrent.duration._
 
 object TradeparserServer {
@@ -38,10 +36,7 @@ object TradeparserServer {
 
       mflService = new MflService[F](mflClient, playerIdConverter)
 
-      leagueIdTopic <- Stream.eval(Topic.apply[F, LeagueId])
-      topics = Topics(leagueIdTopic)
-
-      _ <- new FantasySiteUpdateService[F](mflService, topics, databaseService, 10.seconds).stream
+      _ <- new FantasySiteUpdateService[F](mflService, databaseService, 10.seconds).stream
 
       exitCode = ExitCode.Success
     } yield exitCode
