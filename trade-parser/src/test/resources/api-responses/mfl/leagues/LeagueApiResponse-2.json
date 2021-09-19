@@ -1,0 +1,207 @@
+{
+  "version": "1.0",
+  "league": {
+    "currentWaiverType": "BBID_FCFS",
+    "playerLimitUnit": "LEAGUE",
+    "taxiSquad": "0",
+    "endWeek": "17",
+    "maxWaiverRounds": "4",
+    "draft_kind": "email",
+    "lockout": "No",
+    "defaultTradeExpirationDays": "2",
+    "nflPoolStartWeek": "1",
+    "franchises": {
+      "count": "12",
+      "franchise": [
+        {
+          "bbidAvailableBalance": "404.00",
+          "name": "Needs a Nap",
+          "id": "0001",
+          "waiverSortOrder": "12"
+        },
+        {
+          "logo": "https://www62.myfantasyleague.com/fflnetdynamic2020/10010_franchise_logo0002.jpg",
+          "icon": "https://www62.myfantasyleague.com/fflnetdynamic2020/10010_franchise_icon0002.jpg",
+          "bbidAvailableBalance": "753.00",
+          "name": "Black Clouds & Silver Linings",
+          "id": "0002",
+          "waiverSortOrder": "1"
+        },
+        {
+          "abbrev": "Tdubb",
+          "bbidAvailableBalance": "709.00",
+          "name": "Thomas Hewitt Edward Cat",
+          "id": "0003",
+          "waiverSortOrder": "8"
+        },
+        {
+          "bbidAvailableBalance": "46.00",
+          "name": "Baaaaad Man!",
+          "id": "0004",
+          "waiverSortOrder": "7"
+        },
+        {
+          "abbrev": "Scott's Totts",
+          "bbidAvailableBalance": "486.00",
+          "name": "Scott's Totts",
+          "id": "0005",
+          "waiverSortOrder": "9"
+        },
+        {
+          "icon": "https://www62.myfantasyleague.com/fflnet2020/newhelmets/nh-0200.png",
+          "abbrev": "UTE",
+          "bbidAvailableBalance": "52.00",
+          "name": "BEARKATS",
+          "id": "0006",
+          "waiverSortOrder": "2",
+          "stadium": "Hidden Hills"
+        },
+        {
+          "logo": "https://www62.myfantasyleague.com/fflnetdynamic2021/10010_franchise_logo0007.jpg",
+          "icon": "https://www62.myfantasyleague.com/fflnetdynamic2021/10010_franchise_icon0007.jpg",
+          "abbrev": "SNW",
+          "bbidAvailableBalance": "582.00",
+          "name": "Secret Ninja Warrior",
+          "id": "0007",
+          "waiverSortOrder": "4"
+        },
+        {
+          "icon": "https://www62.myfantasyleague.com/fflnetdynamic2020/10010_franchise_icon0008.jpg",
+          "bbidAvailableBalance": "489.00",
+          "name": "Swalls",
+          "id": "0008",
+          "waiverSortOrder": "11"
+        },
+        {
+          "bbidAvailableBalance": "842.00",
+          "name": "Ceedees TDs",
+          "id": "0009",
+          "waiverSortOrder": "5"
+        },
+        {
+          "logo": "https://www62.myfantasyleague.com/fflnetdynamic2020/10010_franchise_logo0010.jpg",
+          "icon": "https://www62.myfantasyleague.com/fflnetdynamic2020/10010_franchise_icon0010.jpg",
+          "abbrev": "Bmw",
+          "bbidAvailableBalance": "500.00",
+          "name": "THE IRISHMAN",
+          "id": "0010",
+          "waiverSortOrder": "6"
+        },
+        {
+          "bbidAvailableBalance": "687.00",
+          "name": "Franchise 11",
+          "id": "0011",
+          "waiverSortOrder": "3"
+        },
+        {
+          "bbidAvailableBalance": "516.00",
+          "name": "Sheepskins",
+          "id": "0012",
+          "waiverSortOrder": "10"
+        }
+      ]
+    },
+    "standingsSort": "PCT,PTS,OPP_PTS,",
+    "draftPlayerPool": "Both",
+    "id": "10010",
+    "nflPoolType": "Confidence",
+    "history": {
+      "league": [
+        {
+          "url": "https://www62.myfantasyleague.com/2021/home/10010",
+          "year": "2021"
+        },
+        {
+          "url": "https://www62.myfantasyleague.com/2020/home/10010",
+          "year": "2020"
+        }
+      ]
+    },
+    "rosterSize": "23",
+    "name": "Apex Amateur Dynasty 203",
+    "bbidSeasonLimit": "500",
+    "draftTimer": "ONS",
+    "rosterLimits": {
+      "position": [
+        {
+          "name": "QB",
+          "limit": "0-0"
+        },
+        {
+          "name": "RB",
+          "limit": "0-0"
+        },
+        {
+          "name": "WR",
+          "limit": "0-0"
+        },
+        {
+          "name": "TE",
+          "limit": "0-0"
+        },
+        {
+          "name": "PK",
+          "limit": "0-0"
+        },
+        {
+          "name": "Def",
+          "limit": "0-0"
+        }
+      ]
+    },
+    "bbidIncrement": "1",
+    "mobileAlerts": "0004,0005,",
+    "draftLimitHours": "8:00",
+    "starters": {
+      "count": "10",
+      "position": [
+        {
+          "name": "QB",
+          "limit": "1"
+        },
+        {
+          "name": "RB",
+          "limit": "2-3"
+        },
+        {
+          "name": "WR",
+          "limit": "3-4"
+        },
+        {
+          "name": "TE",
+          "limit": "1-2"
+        },
+        {
+          "name": "PK",
+          "limit": "1"
+        },
+        {
+          "name": "Def",
+          "limit": "1"
+        }
+      ]
+    },
+    "nflPoolEndWeek": "17",
+    "bestLineup": "No",
+    "precision": "2",
+    "lastRegularSeasonWeek": "14",
+    "survivorPool": "Yes",
+    "draftTimerSusp": "02 05",
+    "bbidTiebreaker": "SORT",
+    "usesContractYear": "0",
+    "injuredReserve": "5",
+    "bbidConditional": "No",
+    "startWeek": "1",
+    "survivorPoolStartWeek": "1",
+    "survivorPoolEndWeek": "17",
+    "bbidFCFSCharge": "",
+    "rostersPerPlayer": "1",
+    "leagueLogo": "https://www62.myfantasyleague.com/fflnetdynamic2021/16370_league_logo.png",
+    "h2h": "YES",
+    "usesSalaries": "0",
+    "bbidMinimum": "1",
+    "baseURL": "https://www62.myfantasyleague.com",
+    "loadRosters": "email_draft"
+  },
+  "encoding": "utf-8"
+}

@@ -17,6 +17,7 @@ class JsonFileLoaderTest extends AnyFunSpec with Matchers {
       ("directory", "File loader"),
       ("mfl/rules", JsonUtils.load[RulesApiResponse]),
       ("mfl/trades", JsonUtils.load[TradesApiResponse]),
+      ("mfl/leagues", JsonUtils.load[LeagueApiResponse])
     )
 
   describe("Can parse JSON api responses") {

@@ -16,7 +16,7 @@ object ApiResponses {
       load[TradesApiResponse]("mfl/trades/TradesResponse.json")
 
     val LeagueResponse: LeagueApiResponse =
-      load[LeagueApiResponse]("mfl/LeagueResponse.json")
+      load[LeagueApiResponse]("mfl/leagues/LeagueResponse.json")
 
     val RulesResponse: RulesApiResponse =
       load[RulesApiResponse]("mfl/rules/RulesResponse.json")
