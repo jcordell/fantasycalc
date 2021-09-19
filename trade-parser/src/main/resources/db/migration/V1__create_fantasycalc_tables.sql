@@ -34,7 +34,9 @@ create table Players(
 create table Trades(
     tradeId UUID NOT NULL UNIQUE,
     leagueId VARCHAR(50) NOT NULL,
-	CONSTRAINT fk_leagueId FOREIGN KEY(leagueId) REFERENCES Leagues(leagueId)
+    timestamp TIMESTAMP NOT NULL,
+	CONSTRAINT fk_leagueId FOREIGN KEY(leagueId) REFERENCES Leagues(leagueId),
+	PRIMARY KEY(leagueId, timestamp)
 );
 
 create table TradedPlayers(

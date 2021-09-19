@@ -1,6 +1,6 @@
 package fantasycalc.tradeparser.models
 
-import org.joda.time._
+import java.time.Instant
 
 case class Trade(leagueId: LeagueId,
                  date: Instant,

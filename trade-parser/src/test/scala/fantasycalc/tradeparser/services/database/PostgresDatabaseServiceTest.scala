@@ -1,5 +1,7 @@
 package fantasycalc.tradeparser.services.database
 
+import java.time.Instant
+
 import cats.effect.IO
 import cats.effect.unsafe.IORuntime
 import cats.effect.unsafe.IORuntime.global
@@ -13,10 +15,9 @@ import org.flywaydb.core.Flyway
 import org.flywaydb.core.api.Location
 import org.flywaydb.core.api.configuration.ClassicConfiguration
 import org.flywaydb.core.api.output.MigrateResult
-import org.joda.time.Instant
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.{BeforeAndAfterEach, ParallelTestExecution}
+import org.scalatest.{BeforeAndAfterEach, OneInstancePerTest, ParallelTestExecution}
 
 // TODO: Better test assertions once able to fetch data from DB
 class PostgresDatabaseServiceTest
@@ -31,7 +32,15 @@ class PostgresDatabaseServiceTest
 
   override def beforeEach(): Unit = {
     runMigrations
-    insertMockPlayers().unsafeRunSync()
+
+    val player = Player(
+      FantasycalcAssetId(1),
+      PlayerName("player name"),
+      MflId("100"),
+      Position.WR
+    )
+    insertMockPlayer(player).unsafeRunSync()
+    insertMockPlayer(player.copy(id = FantasycalcAssetId(2))).unsafeRunSync()
   }
 
   lazy val databaseConnection: Aux[IO, Unit] =
@@ -57,14 +66,8 @@ class PostgresDatabaseServiceTest
     flyway.migrate()
   }
 
-  def insertMockPlayers(): IO[Int] = {
-    val player = Player(
-      FantasycalcAssetId(1),
-      PlayerName("player name"),
-      MflId("100"),
-      Position.WR
-    )
-    sql"INSERT INTO Players VALUES (${player.id.id}, ${player.name.name}, ${player.mflId.id}, ${player.position.entryName}".update.run
+  def insertMockPlayer(player: Player): IO[Int] = {
+    sql"INSERT INTO Players VALUES (${player.id.id}, ${player.name.name}, ${player.mflId.id}, ${player.position.entryName})".update.run
       .transact(databaseConnection)
   }
 
@@ -83,7 +86,7 @@ class PostgresDatabaseServiceTest
   }
 
   describe("storeTrades") {
-    it("should insert correct number of trades") {
+    it("should insert trades") {
       val postgresDatabaseService =
         new PostgresDatabaseService(databaseConnection)
       val trade = Trade(
@@ -97,6 +100,25 @@ class PostgresDatabaseServiceTest
         _ <- postgresDatabaseService.storeLeague(leagueId, leagueSettings)
         result <- postgresDatabaseService.storeTrade(trade)
       } yield result).unsafeRunSync()
+
+      actual shouldBe 2
+    }
+
+    it("should not insert duplicate trade") {
+      val postgresDatabaseService =
+        new PostgresDatabaseService(databaseConnection)
+      val trade = Trade(
+        leagueId,
+        Instant.now,
+        List(FantasycalcAssetId(1)),
+        List(FantasycalcAssetId(2))
+      )
+
+      val actual = (for {
+        _ <- postgresDatabaseService.storeLeague(leagueId, leagueSettings)
+        result <- postgresDatabaseService.storeTrade(trade)
+        secondInsertResult <- postgresDatabaseService.storeTrade(trade)
+      } yield result + secondInsertResult).unsafeRunSync()
 
       actual shouldBe 2
     }

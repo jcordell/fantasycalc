@@ -1,23 +1,12 @@
 package fantasycalc.tradeparser.services.fantasysite.scrapers
+import java.time.Instant
+
 import cats.Id
 import fantasycalc.tradeparser.ApiResponses
 import fantasycalc.tradeparser.clients.MflClient
 import fantasycalc.tradeparser.mocks.PlayerIdConverterMock
-import fantasycalc.tradeparser.models.{
-  FantasycalcAssetId,
-  LeagueId,
-  LeagueSettings,
-  Starters,
-  Trade
-}
-import fantasycalc.tradeparser.models.api.mfl.{
-  LeagueApiResponse,
-  LeagueSearchApiResponse,
-  PlayersApiResponse,
-  RulesApiResponse,
-  TradesApiResponse
-}
-import org.joda.time.Instant
+import fantasycalc.tradeparser.models.{FantasycalcAssetId, LeagueId, LeagueSettings, Starters, Trade}
+import fantasycalc.tradeparser.models.api.mfl.{LeagueApiResponse, LeagueSearchApiResponse, PlayersApiResponse, RulesApiResponse, TradesApiResponse}
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 

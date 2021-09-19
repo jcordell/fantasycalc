@@ -1,5 +1,7 @@
 package fantasycalc.tradeparser.services.fantasysite.scrapers
 
+import java.time.Instant
+
 import cats.Monad
 import cats.implicits._
 import fantasycalc.tradeparser.clients.MflClient
@@ -7,7 +9,6 @@ import fantasycalc.tradeparser.models._
 import fantasycalc.tradeparser.models.api.mfl._
 import fantasycalc.tradeparser.services.fantasysite.FantasySiteService
 import fantasycalc.tradeparser.services.fantasysite.mfl.PlayerIdConverter
-import org.joda.time.Instant
 
 class MflService[F[_]: Monad](mflClient: MflClient[F],
                               playerIdConverter: PlayerIdConverter)
