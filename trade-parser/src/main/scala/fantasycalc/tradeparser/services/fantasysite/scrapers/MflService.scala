@@ -71,8 +71,11 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
     val parsedLimitOrDefault = mflStarterLimits.position
       .find(_.name.contains(position.entryName))
       .map(_.limit)
+      .map(_.last.toString)
       .getOrElse {
-        println(s"Could not find $position in MFL starter limits, using default.")
+        println(
+          s"Could not find $position in MFL starter limits, using default."
+        )
         default
       }
     parsedLimitOrDefault.toIntOption.getOrElse {
@@ -83,7 +86,7 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
 
   private def mapToRules(rules: List[MflPositionRules]) =
     rules.map {
-      case rule: PositionRule => PositionRules(rule.positions, List(rule.rule))
+      case rule: PositionRule   => PositionRules(rule.positions, List(rule.rule))
       case rules: PositionRules => rules
     }
 
