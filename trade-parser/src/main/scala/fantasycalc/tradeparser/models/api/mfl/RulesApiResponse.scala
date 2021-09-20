@@ -15,8 +15,12 @@ sealed trait MflPositionRules
 case class PositionRules(positions: String, rule: List[Rule])
     extends MflPositionRules
 case class PositionRule(positions: String, rule: Rule) extends MflPositionRules
-case class Rules(positionRules: List[MflPositionRules])
-case class RulesApiResponse(version: String, rules: Rules, encoding: String)
+
+sealed trait MflRules
+case class Rules(positionRules: List[MflPositionRules]) extends MflRules
+case class SinglePositionRules(positionRules: MflPositionRules) extends MflRules
+
+case class RulesApiResponse(version: String, rules: MflRules, encoding: String)
 
 object MflPositionRules {
   implicit val mflPositionRulesDecoder: Decoder[MflPositionRules] =
@@ -24,7 +28,13 @@ object MflPositionRules {
       Decoder[PositionRule].widen,
       Decoder[PositionRules].widen
     ).reduceLeft(_ or _)
-  implicit val rulesDecoder: Decoder[Rules] = deriveDecoder[Rules]
+
+  implicit val mflRulesDecoder: Decoder[MflRules] =
+    List[Decoder[MflRules]](
+      Decoder[Rules].widen,
+      Decoder[SinglePositionRules].widen
+    ).reduceLeft(_ or _)
+
   implicit val rulesApiResponseDecoder: Decoder[RulesApiResponse] = deriveDecoder[RulesApiResponse]
 
 }

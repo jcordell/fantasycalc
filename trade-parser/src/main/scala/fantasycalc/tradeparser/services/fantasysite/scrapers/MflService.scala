@@ -46,12 +46,13 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
       league <- mflClient.getLeague(leagueId)
       rules <- mflClient.getRules(leagueId)
     } yield {
+      println(s"parsing settings for leagueId=$leagueId")
       LeagueSettings(
         leagueId,
         // TODO: remove .toInt
         league.league.franchises.count.toInt,
         parseStartingRules(league.league.starters),
-        parsePprRules(mapToRules(rules.rules.positionRules)),
+        parsePprRules(parseFormattedPositionRules(rules.rules)),
         isDynasty = true // TODO
       )
     }
@@ -84,7 +85,14 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
     }
   }
 
-  private def mapToRules(rules: List[MflPositionRules]) =
+  private def parseFormattedPositionRules: MflRules => List[PositionRules] = reformatRule _ andThen reformatPositionRule
+
+  private def reformatRule(rules: MflRules): List[MflPositionRules] = rules match {
+    case rule: Rules => rule.positionRules
+    case rule: SinglePositionRules => List(rule.positionRules)
+  }
+
+  private def reformatPositionRule(rules: List[MflPositionRules]): List[PositionRules] =
     rules.map {
       case rule: PositionRule   => PositionRules(rule.positions, List(rule.rule))
       case rules: PositionRules => rules

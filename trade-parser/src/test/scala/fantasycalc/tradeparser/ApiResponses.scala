@@ -1,4 +1,5 @@
 package fantasycalc.tradeparser
+import fantasycalc.tradeparser.models.api.mfl.MflPositionRules._
 import fantasycalc.tradeparser.models.api.mfl._
 import fantasycalc.tradeparser.testhelpers.JsonUtils.load
 import io.circe.generic.auto._
