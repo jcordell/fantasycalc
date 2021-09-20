@@ -31,5 +31,6 @@ object Position extends Enum[Position] {
   case object RB extends Position
   case object DT extends Position
   case object S extends Position
-  case object DE  extends Position
+  case object DE extends Position
+  case object PICK extends Position
 }

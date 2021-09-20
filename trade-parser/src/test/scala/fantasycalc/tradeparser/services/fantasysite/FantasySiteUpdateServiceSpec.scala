@@ -6,7 +6,6 @@ import cats.effect.unsafe.IORuntime
 import cats.effect.unsafe.IORuntime.global
 import fantasycalc.tradeparser.models._
 import fantasycalc.tradeparser.services.database.DatabaseService
-import fantasycalc.tradeparser.services.messaging.Topics
 import fs2.Stream
 import fs2.concurrent.Topic
 import org.joda.time.Instant

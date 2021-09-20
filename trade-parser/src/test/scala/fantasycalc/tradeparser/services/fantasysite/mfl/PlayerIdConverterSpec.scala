@@ -30,6 +30,24 @@ class PlayerIdConverterSpec extends AnyFunSpec with Matchers {
       actual shouldBe Some(FantasycalcAssetId(100))
 
     }
+
+    it("should remap future picks") {
+      val playerIdConverter =
+        new PlayerIdConverter(
+          List(
+            Player(
+              id = FantasycalcAssetId(100),
+              name = PlayerName("Player 1"),
+              mflId = MflId("FP_2022_2"),
+              position = Position.WR
+            )
+          )
+        )
+
+      val actual = playerIdConverter.toFantasycalcAssetId(MflId("FP_0001_2022_2"))
+      actual shouldBe Some(FantasycalcAssetId(100))
+
+    }
   }
 
 }
