@@ -48,7 +48,6 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
       league <- mflClient.getLeague(leagueId)
       rules <- mflClient.getRules(leagueId)
     } yield {
-      println(s"parsing settings for leagueId=$leagueId")
       LeagueSettings(
         leagueId,
         // TODO: remove .toInt

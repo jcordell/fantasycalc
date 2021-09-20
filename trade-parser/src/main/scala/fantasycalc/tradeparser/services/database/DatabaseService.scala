@@ -34,7 +34,6 @@ class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
 
   override def storeLeague(leagueId: LeagueId,
                            settings: LeagueSettings): IO[Int] = {
-    println(s"DatabaseService: Inserting league leagueId=$leagueId")
     // TODO: real siteID
     sql"insert into Leagues values (${leagueId.id}, 1, ${settings.numTeams}, ${settings.ppr}, ${settings.starters.quarterback}, ${settings.isDynasty}) on conflict do nothing".update.run
       .transact(xa)
@@ -43,7 +42,6 @@ class PostgresDatabaseService(xa: Aux[IO, Unit]) extends DatabaseService[IO] {
   override def storeTrade(trade: Trade): IO[Int] =
     for {
       uuid <- UUIDGen[IO].randomUUID
-      _ = println(s"DatabaseService: Storing trade leagueId=${trade.leagueId}")
       numInsertedTrades <- insertTrade(uuid, trade.leagueId, trade.date).update.run
         .transact(xa)
       // Don't attempt to insert duplicate trades

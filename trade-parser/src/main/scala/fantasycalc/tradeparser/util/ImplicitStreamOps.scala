@@ -18,7 +18,7 @@ object ImplicitStreamOps {
           MonadError[F, Throwable].attempt(fa(value)).map {
             case Right(value) => Right(value)
             case Left(throwable) =>
-              println("Error processing stream", throwable)
+              println("Error processing mapped stream", throwable)
               Left(throwable)
           }
         })
@@ -35,7 +35,7 @@ object ImplicitStreamOps {
           MonadError[F, Throwable].attempt(fa(value)).map {
             case Right(value) => Right(value)
             case Left(throwable) =>
-              println("Error processing stream", throwable)
+              println("Error processing tapped stream", throwable)
               Left(throwable)
           }
         })

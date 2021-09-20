@@ -23,8 +23,8 @@ object TradeparserServer {
     for {
       // TODO: Should be able to swtich back to EmberClientBuilder once https://github.com/http4s/http4s/issues/4935 is merged and deployed.
       client <- BlazeClientBuilder[F](global).stream
-      httpClient: Client[F] = ResponseLogger(logHeaders = true, logBody = true)(
-        RequestLogger[F](logHeaders = true, logBody = true)(
+      httpClient: Client[F] = ResponseLogger(logHeaders = false, logBody = false)(
+        RequestLogger[F](logHeaders = false, logBody = false)(
           FollowRedirect.apply(100)(client)
         )
       )
