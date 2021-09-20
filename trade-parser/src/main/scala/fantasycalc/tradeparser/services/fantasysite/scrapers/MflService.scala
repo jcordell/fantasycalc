@@ -10,6 +10,8 @@ import fantasycalc.tradeparser.models.api.mfl._
 import fantasycalc.tradeparser.services.fantasysite.FantasySiteService
 import fantasycalc.tradeparser.services.fantasysite.mfl.PlayerIdConverter
 
+import scala.util.Try
+
 class MflService[F[_]: Monad](mflClient: MflClient[F],
                               playerIdConverter: PlayerIdConverter)
     extends FantasySiteService[F] {
@@ -98,7 +100,7 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
       case rules: PositionRules => rules
     }
 
-  private def parsePprRules(rules: List[PositionRules]): Int = {
+  private[scrapers] def parsePprRules(rules: List[PositionRules]): BigDecimal = {
     val wideReceiverRules = rules
       .filter(_.positions.contains(MflPosition.WR.entryName))
       .flatMap(_.rule)
@@ -109,9 +111,9 @@ class MflService[F[_]: Monad](mflClient: MflClient[F],
         println("Could not find PPR value, using default")
         "1"
       }
-    parsedPprValueOrDefault.toIntOption.getOrElse {
-      println("Could not parse PPR value to Int: " + parsedPprValueOrDefault)
-      1
+    Try(BigDecimal(parsedPprValueOrDefault)).toOption.getOrElse {
+      println("Could not parse PPR value to BigDecimal: " + parsedPprValueOrDefault)
+      BigDecimal(1)
     }
   }
 }

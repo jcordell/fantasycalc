@@ -5,8 +5,23 @@ import cats.Id
 import fantasycalc.tradeparser.ApiResponses
 import fantasycalc.tradeparser.clients.MflClient
 import fantasycalc.tradeparser.mocks.PlayerIdConverterMock
-import fantasycalc.tradeparser.models.{FantasycalcAssetId, LeagueId, LeagueSettings, Starters, Trade}
-import fantasycalc.tradeparser.models.api.mfl.{LeagueApiResponse, LeagueSearchApiResponse, PlayersApiResponse, RulesApiResponse, TradesApiResponse}
+import fantasycalc.tradeparser.models.{
+  FantasycalcAssetId,
+  LeagueId,
+  LeagueSettings,
+  Starters,
+  Trade
+}
+import fantasycalc.tradeparser.models.api.mfl.{
+  LeagueApiResponse,
+  LeagueSearchApiResponse,
+  PlayersApiResponse,
+  Points,
+  PositionRules,
+  Rule,
+  RulesApiResponse,
+  TradesApiResponse
+}
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -54,17 +69,40 @@ class MflServiceSpec extends AnyFunSpec with Matchers {
         isDynasty = true
       )
     }
+
+    it("should parse half PPR") {
+      val mflService =
+        new MflService[Id](MockMflClient, new PlayerIdConverterMock)
+
+      val rules = PositionRules(
+        positions = "QB|WR",
+        rule = List(
+          Rule(
+            points = Points(".5"),
+            range = Points("any"),
+            event = Points("CC")
+          )
+        )
+      )
+      val actual = mflService.parsePprRules(List(rules))
+      actual shouldBe BigDecimal(.5)
+    }
   }
 }
 
 object MockMflClient extends MflClient[Id] {
-  override def searchLeagues(search: String): Id[LeagueSearchApiResponse] = ApiResponses.Mfl.SearchLeaguesResponse
+  override def searchLeagues(search: String): Id[LeagueSearchApiResponse] =
+    ApiResponses.Mfl.SearchLeaguesResponse
 
-  override def getPlayers: Id[PlayersApiResponse] = ApiResponses.Mfl.PlayersResponse
+  override def getPlayers: Id[PlayersApiResponse] =
+    ApiResponses.Mfl.PlayersResponse
 
-  override def getTrades(leagueId: LeagueId): Id[TradesApiResponse] = ApiResponses.Mfl.TradesResponse
+  override def getTrades(leagueId: LeagueId): Id[TradesApiResponse] =
+    ApiResponses.Mfl.TradesResponse
 
-  override def getRules(leagueId: LeagueId): Id[RulesApiResponse] = ApiResponses.Mfl.RulesResponse
+  override def getRules(leagueId: LeagueId): Id[RulesApiResponse] =
+    ApiResponses.Mfl.RulesResponse
 
-  override def getLeague(leagueId: LeagueId): Id[LeagueApiResponse] = ApiResponses.Mfl.LeagueResponse
+  override def getLeague(leagueId: LeagueId): Id[LeagueApiResponse] =
+    ApiResponses.Mfl.LeagueResponse
 }
