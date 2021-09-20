@@ -1,0 +1,139 @@
+{
+  "version" : "1.0",
+  "league" : {
+    "currentWaiverType" : "WAIVERS_FCFS",
+    "playerLimitUnit" : "LEAGUE",
+    "taxiSquad" : "0",
+    "endWeek" : "17",
+    "draft_kind" : "email",
+    "lockout" : "No",
+    "nflPoolStartWeek" : "1",
+    "auction_kind" : "email",
+    "franchises" : {
+      "count" : "12",
+      "franchise" : [
+        {
+          "name" : "Franchise 1",
+          "id" : "0001",
+          "waiverSortOrder" : "12"
+        },
+        {
+          "name" : "Franchise 2",
+          "id" : "0002",
+          "waiverSortOrder" : "11"
+        },
+        {
+          "name" : "Franchise 3",
+          "id" : "0003",
+          "waiverSortOrder" : "10"
+        },
+        {
+          "name" : "Franchise 4",
+          "id" : "0004",
+          "waiverSortOrder" : "9"
+        },
+        {
+          "name" : "Franchise 5",
+          "id" : "0005",
+          "waiverSortOrder" : "8"
+        },
+        {
+          "name" : "Franchise 6",
+          "id" : "0006",
+          "waiverSortOrder" : "7"
+        },
+        {
+          "name" : "Franchise 7",
+          "id" : "0007",
+          "waiverSortOrder" : "6"
+        },
+        {
+          "name" : "Franchise 8",
+          "id" : "0008",
+          "waiverSortOrder" : "5"
+        },
+        {
+          "name" : "Franchise 9",
+          "id" : "0009",
+          "waiverSortOrder" : "4"
+        },
+        {
+          "name" : "Franchise 10",
+          "id" : "0010",
+          "waiverSortOrder" : "3"
+        },
+        {
+          "name" : "Franchise 11",
+          "id" : "0011",
+          "waiverSortOrder" : "2"
+        },
+        {
+          "name" : "Franchise 12",
+          "id" : "0012",
+          "waiverSortOrder" : "1"
+        }
+      ]
+    },
+    "standingsSort" : "PCT,PTS",
+    "id" : "10273",
+    "minBid" : "",
+    "nflPoolType" : "",
+    "history" : {
+      "league" : {
+        "url" : "https://www69.myfantasyleague.com/2021/home/10273",
+        "year" : "2021"
+      }
+    },
+    "rosterSize" : "20",
+    "name" : "2021 Dynasty League ",
+    "fantasyPoolType" : "",
+    "mobileAlerts" : "",
+    "starters" : {
+      "count" : "8",
+      "position" : [
+        {
+          "name" : "QB",
+          "limit" : "1"
+        },
+        {
+          "name" : "RB",
+          "limit" : "2"
+        },
+        {
+          "name" : "WR",
+          "limit" : "2"
+        },
+        {
+          "name" : "TE",
+          "limit" : "1"
+        },
+        {
+          "name" : "PK",
+          "limit" : "1"
+        },
+        {
+          "name" : "Def",
+          "limit" : "1"
+        }
+      ]
+    },
+    "fantasyPoolEndWeek" : "17",
+    "nflPoolEndWeek" : "17",
+    "precision" : "0",
+    "lastRegularSeasonWeek" : "1",
+    "survivorPool" : "Yes",
+    "usesContractYear" : "0",
+    "injuredReserve" : "3",
+    "startWeek" : "1",
+    "survivorPoolStartWeek" : "1",
+    "fantasyPoolStartWeek" : "1",
+    "survivorPoolEndWeek" : "17",
+    "rostersPerPlayer" : "1",
+    "h2h" : "YES",
+    "usesSalaries" : "0",
+    "bidIncrement" : "",
+    "baseURL" : "https://www69.myfantasyleague.com",
+    "loadRosters" : "email_draft_email_auction"
+  },
+  "encoding" : "utf-8"
+}
